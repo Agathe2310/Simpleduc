@@ -31,3 +31,5 @@ function saveProduct($db, $label, $description, $price, $category) {
         'idCategory' => $category
     ]);
 }
+
+function addContrat($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre)

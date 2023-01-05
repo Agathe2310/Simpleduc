@@ -1,5 +1,5 @@
 Exportation des données de PHPMyAdmin à sql.sql :
-mysqldump -u loginTONNUMERO -p SLAM-Projet1 > sql.sql
+mysqldump -u loginTONNUMERO -p SLAM-Projet1 > sql/sql.sql
 
 Importation de sql.sql à PHPMyAdmin :
-mysql --user='loginTONNUMERO' --password='XXXXXXXX' SLAM-Projet1 <'sql.sql'
+mysql --user='loginTONNUMERO' --password='XXXXXXXX' SLAM-Projet1 <'sql/sql.sql'

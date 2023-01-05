@@ -2,11 +2,10 @@
 
 $routes = [
     'home' => 'homeController',
-    'about' => 'aboutController',
-    'contact' => 'contactController',
-    'mentionsLegales' => 'mentionsLegalesController',
-    'notFound' => 'notFoundController',
+    'addPersonne' => 'addPersonneController',
     'dbError' => 'dbErrorController',
     'addProduct' => 'addProductController',
-    'addEntreprise' => 'addEntrepriseController'
+    'addEntreprise' => 'addEntrepriseController',
+    'addModule' => 'addModuleController',
+    'addTache' => 'addTacheController'
 ];

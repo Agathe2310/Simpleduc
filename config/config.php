@@ -2,7 +2,7 @@
 
 $config = [
     'dbserver'      => 'localhost',
-    'dblogin'       => 'login8060',
-    'dbpassword'    => 'ozlowUrCCuOTNPU',
-    'dbname'        => 'dblogin8060'
+    'dblogin'       => 'login8056',
+    'dbpassword'    => 'ObGVoaOyXElcgpp',
+    'dbname'        => 'SLAM-Projet1'
 ];

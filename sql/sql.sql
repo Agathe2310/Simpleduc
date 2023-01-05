@@ -152,7 +152,7 @@ CREATE TABLE `Outil` (
 CREATE TABLE `Personne` (
   `IDPersonne` int(11) NOT NULL,
   `Nom` varchar(50) DEFAULT NULL,
-  `Prénom` varchar(50) DEFAULT NULL
+  `Prenom` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

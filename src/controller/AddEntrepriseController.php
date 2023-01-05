@@ -10,7 +10,7 @@ function addRenduController($twig,$db){
         $datecreation = htmlspecialchars($_POST['trip-start']);
         $dateline = htmlspecialchars($_POST['trip-end']);
         $prof = $_SESSION['username'];
-        saveRendu($db,$label,$description,$idgroupe,$prof,$datecreation,$dateline);
+        //saveRendu($db,$label,$description,$idgroupe,$prof,$datecreation,$dateline);
     
     }else{
         if(isset($_POST['btnAddRendu'])==true){

@@ -1,0 +1,47 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Page ajouter
+{% endblock %}
+
+{% block content %}
+	<h1>Ajouter un rendu</h1>
+
+	<div class="container">
+		<form
+			action="index.php?page=addRendu" method="POST" class="encadre grande-margin-lr">
+			<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
+			<p>
+				<label for="renduLabel" class="form-label">Libellé</label>
+			</p>
+			<p><input type="text" class="form-control" id="renduLabel" name="renduLabel"></p>
+			<p>
+				<label for="renduDescription" class="form-label">Description</label>
+			</p>
+			<p>
+				<textarea class="form-control" id="renduDescription" name="renduDescription" rows="3"></textarea>
+			</p>
+			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
+			<p>
+				<label for="renduGroupe" class="form-label">Groupe</label>
+			</p>
+			<p>
+				<select class="form-select" id="renduGroupe" name="renduGroupe"></p>
+				<option value="">Saisir le groupe</option>
+				<option value="1">SN1</option>
+				<option value="2">SN2</option>
+			</p>
+		</select>
+		<p>
+			<label for="meeting-time">Date de début :</label>
+		</p>
+		<p><input type="datetime-local" id="meeting-time" name="trip-start" value=""></p>
+		<p>
+			<label for="meeting-time">Date de fin :</label>
+		</p>
+		<p><input type="datetime-local" id="meeting-time" name="trip-end" value=""></p>
+		<input type="hidden" name="prof" value="1">
+		<button type="submit" class="btn btn-primary" name="btnAddRendu">Ajouter</button>
+		<!-- On va vouloir détecter quand on appuie-->
+	</form>
+</div>{% endblock %}

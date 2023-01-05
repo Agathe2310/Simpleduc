@@ -3,6 +3,7 @@
 $routes = [
     'home' => 'homeController',
     'addPersonne' => 'addPersonneController',
-    'dbError' => 'dbErrorController'
-    
+    'dbError' => 'dbErrorController',
+    'addModule' => 'addModuleController',
+    'addTache' => 'addTacheController'
 ];

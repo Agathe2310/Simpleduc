@@ -32,4 +32,8 @@ function saveProduct($db, $label, $description, $price, $category) {
     ]);
 }
 
-function addContrat($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre)
+function addContrat($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre){
+    $query = $db -> prepare("INSERT INTO product(IDContrat, DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre)
+    return $query -> execute([
+        
+}

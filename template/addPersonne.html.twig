@@ -1,0 +1,31 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>
+		Ajout d'une personne
+	</title>
+
+</head>
+{% endblock %}
+
+
+{% block content %}
+	<form action="index.php?page=addPersonne" method="POST" class="bg bg-secondary">
+		<div class="mb-3">
+			<label for="nom" class="form-label">
+				Nom
+			</label>
+			<input type="text" class="form-label" id="nom" name="nom">
+		</div>
+		<div class="mb-3">
+			<label for="prenom" class="form-label">
+				Prénom
+			</label>
+			<input  type="text" class="form-label" id="prenom" name="prenom">
+		</div>
+    <button type="submit" class="btn btn-danger" name="btnAddPersonne">
+Ajouter</button></form>{% endblock %}

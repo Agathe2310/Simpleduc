@@ -12,74 +12,66 @@ Page ajouter
 		<div class="m-4">
 			<h2>Ajouter une Tache :</h2>
 
-			<form action="index.php?page=addModule" method="POST" class="encadre ">
-				<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
+			<form action="index.php?page=addTache" method="POST" class="encadre ">
+
+				<p><label for="tacheLibelle" class="form-label">Libelle</label></p>
+				<p><input type="text" class="form-control" id="tacheLibelle" name="tacheLibelle"></p>
+
+				<p><label for="tacheEtat" class="form-label">Etat</label></p>
+				<p><input type="text" class="form-control" id="tacheEtat" name="tacheEtat"></p>
+
+				<p><label for="tacheModule" class="form-label">Module</label></p>
 				<p>
-					<label for="moduleEtat" class="form-label">Etat</label>
-				</p>
-				<p><input type="text" class="form-control" id="moduleEtat" name="moduleEtat"></p>
-				<p>
-					<label for="moduleEquipe" class="form-label">Equipe</label>
-				</p>
-				<p>
-					<select class="form-select" id="moduleEquipe" name="moduleEquipe">
-				</p>
-				{% for equipe in equipes %}
-				<option value="{{equipe.IDEquipe}}">{{equipe.IDEquipe}}</option>
-				{% endfor %}
-				</select>
-				</p>
-				<p>
-					<label for="moduleContrat" class="form-label">Contrat</label>
-				</p>
-				<p>
-					<select class="form-select" id="moduleContrat" name="moduleContrat">
-				</p>
-				{% for contrat in contrats %}
-				<option value="{{contrat.IDContrat}}">{{contrat.IDContrat}}</option>
-				{% endfor %}
-				</select>
+					<select class="form-select" id="tacheModule" name="tacheModule">
+						{% for module in modules %}
+						<option value="{{module.IDModule}}">{{module.IDModule}} / {{module.Etat}}</option>
+						{% endfor %}
+					</select>
 				</p>
 
-				<button type="submit" class="btn btn-primary m-4" name="btnAddModule">Ajouter</button>
+				<p><label for="tacheDateDebut">Date de Début :</label></p>
+				<p><input type="date" name="tacheDateDebut" id="tacheDateDebut" value="1990-01-01"></p>
 
+				<p><label for="tacheDateFin">Date de Fin :</label></p>
+				<p><input type="date" name="tacheDateFin" id="tacheDateFin" value="1991-01-01"></p>
 
-				<!-- On va vouloir détecter quand on appuie-->
+				<p><button type="submit" class="btn btn-primary m-4" name="btnAddTache">Ajouter</button></p>
+
 			</form>
 		</div>
 	</div>
 
 	<div class="card">
 		<div class="m-4">
-				<h2>Liste des Modules :</h2>
-				<br>
+			<h2>Liste des Taches :</h2>
+			<br>
 
-				{% for module in modules %}
-				<p>
-					<a href="index.php?page=modifModule&id={{module.IDModule}}" style="text-decoration: none;">Modifier</a>
+			{% for tache in taches %}
+			<p>
+				<a href="index.php?page=modifTache&id={{tache.IDTache}}" style="text-decoration: none;">Modifier</a>
 
-					{{module.IDModule}}, Etat : {{module.Etat}}, Equipe : {{module.IDEquipe}}, Contrat :
-					{{module.IDContrat}}
-				</p>
+				{{tache.IDTache}}, Libellé : {{tache.Libelle}}, Etat : {{tache.Etat}}, Module : {{tache.IDModule}}
+				, Date de Début : {{tache.DateDebut}}, Date de Fin : {{tache.DateFin}}
+			</p>
 
-				{% endfor %}
+			{% endfor %}
 		</div>
 	</div>
 
 	<div class="card">
 		<div class="m-4">
 
-			<h2>Supprimer un module :</h2>
-			<form action="index.php?page=addModule" method="POST" class="encadre grande-margin-lr">
+			<h2>Supprimer une Tache :</h2>
+			<form action="index.php?page=addTache" method="POST" class="encadre grande-margin-lr">
 
-				{% for module in modules %}
+				{% for tache in taches %}
 				<p>
-					<input type="checkbox" name="cocheSupp[]" value="{{module.IDModule}}">
-					<label for="{{module.IDModule}}">{{module.Etat}}</label>
+					<input type="checkbox" name="cocheSupp[]" value="{{tache.IDTache}}">
+					<label for="{{tache.IDTache}}">{{tache.Etat}}</label>
 				</p>
 				{% endfor %}
 
-				<button type="submit" class="btn btn-primary m-4" name="btnSuppModule">Supprimer</button>
+				<button type="submit" class="btn btn-primary m-4" name="btnSuppTache">Supprimer</button>
 
 			</form>
 		</div>

@@ -94,15 +94,6 @@ function suppModule($db, $id)
     ]);
 }
 
-function addTache($db, $libelle, $etat, $dateDebut, $dateFin)
-{
-    $query = $db->prepare("INSERT INTO Module (Etat, IDEquipe, IDContrat) VALUES (:Etat, :IDEquipe, :IDContrat)");
-    return $query->execute([
-        'Etat' => $etat,
-        'IDEquipe' => $dateDebut,
-        'IDContrat' => $dateFin
-    ]);
-}
 
 function getAllModules($db)
 {
@@ -174,8 +165,70 @@ function deletePersonne($db, $IDPersonne){
     ]);
     }
 
+
+
+
+
 #function addCoPersonne($db, $rue, $ville, $code_postal, $email)
 #{
 #    $query = $db->prepare("INSERT INTO Coordonnees (Rue, Ville, Code_Postal, email, IDPersonne) VALUES (:Rue, :Ville, :Code_Postal, :email, ")
 #
 #}
+
+
+
+function addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module)
+{
+    $query = $db->prepare("INSERT INTO Tache (Libelle, Etat, DateDebut, DateFin, IDModule) VALUES (:Libelle, :Etat, :DateDebut, :DateFin, :IDModule)");
+    return $query->execute([
+        'Libelle' => $libelle,
+        'Etat' => $etat,
+        'DateDebut' => $dateDebut,
+        'DateFin' => $dateFin,
+        'IDModule' => $module
+    ]);
+}
+
+function getAllTaches($db) {
+    $query = $db->prepare("SELECT IDTache, Libelle, Etat, DateDebut, DateFin, IDModule FROM Tache");
+    $query->execute([]);
+
+    $product = $query->fetchAll();
+
+    return $product;
+}
+
+
+function suppTache($db, $tache) {
+    $query = $db->prepare("DELETE FROM Tache
+                            WHERE IDTache = :IDTache ");
+    $query->execute([
+        'IDTache' => $tache
+    ]);
+}
+
+function getTache($db, $id)
+{
+    $query = $db->prepare("SELECT IDTache, Libelle, Etat, DateDebut, DateFin, IDModule FROM Tache WHERE :IDTache = IDTache");
+    $query->execute([
+        'IDTache' => $id
+    ]);
+
+    $product = $query->fetch();
+
+    if ($product != null ) return $product;
+    else return "Cette tache n'existe pas !";
+}
+
+function updateTache($db, $id, $libelle, $etat, $dateDebut, $dateFin, $module)
+{
+    $query = $db->prepare("UPDATE Tache SET Libelle = :Libelle, Etat = :Etat, DateDebut = :DateDebut, DateFin = :DateFin, IDModule = :IDModule WHERE IDTache = :IDTache ");
+    $query->execute([
+        'Libelle' => $libelle,
+        'Etat' => $etat,
+        'DateDebut' => $dateDebut,
+        'DateFin' => $dateFin,
+        'IDModule' => $module,
+        'IDTache' => $id
+    ]);
+}

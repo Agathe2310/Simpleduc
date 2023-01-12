@@ -12,5 +12,6 @@ $routes = [
     'addTache' => 'addTacheController',
     'listePersonnes' => 'listePersonnesController',
     'modifModule' => 'modifModuleController',
-    'addTache' => 'addTacheController'
+    'addTache' => 'addTacheController',
+    'modifTache' => 'modifTacheController'
 ];

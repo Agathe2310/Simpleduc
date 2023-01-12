@@ -6,28 +6,36 @@ function addTacheController($twig, $db)
 
     var_dump($_POST);
 
-    if (isset($_POST['moduleEtat']) && isset($_POST['moduleEquipe']) && isset($_POST['moduleContrat']) && isset($_POST['btnAddModule'])) { ##determiner si le tableau est definit btnAddProduct nom du bouton on regarde s'il existe lors d'un envoi de formulaire
-        $etat = htmlspecialchars($_POST['moduleEtat']);
-        $equipe = $_POST['moduleEquipe'];
-        $contrat = $_POST['moduleContrat'];
-        addModule($db, $etat, $equipe, $contrat);
+    if (
+        isset($_POST['tacheEtat'])
+        && isset($_POST['tacheModule'])
+        && isset($_POST['tacheLibelle'])
+        && isset($_POST['tacheDateDebut'])
+        && isset($_POST['tacheDateFin'])
+    ) {
+        $etat = htmlspecialchars($_POST['tacheEtat']);
+        $libelle = htmlspecialchars($_POST['tacheLibelle']);
+        $dateDebut = $_POST['tacheDateDebut'];
+        $dateFin = $_POST['tacheDateFin'];
+        $module = $_POST['tacheModule'];
+
+        addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module);
     } else {
-        if (isset($_POST['btnAddModule']) == true) {
+        if (isset($_POST['btnAddTache']) == true) {
             echo '<script language="Javascript">
                 alert ("Tu as oublié de saisir un ou des champs." )
                 </script>';
         }
     }
 
-    if (isset($_POST["btnSuppModule"])) {
-        foreach ($_POST["cocheSupp"] as $module) {
-            suppModule($db, $module);
+    if (isset($_POST["btnSuppTache"])) {
+        foreach ($_POST["cocheSupp"] as $tache) {
+            suppTache($db, $tache);
         }
     }
 
     echo $twig->render("addTache.html.twig", [
-        "modules" => getAllModules($db),
-        "equipes" => getAllEquipes($db),
-        "contrats" => getAllContrats($db)
+        "taches" => getAllTaches($db),
+        "modules" => getAllModules($db)
     ]);
 }

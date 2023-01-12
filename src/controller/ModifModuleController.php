@@ -4,8 +4,6 @@ function modifModuleController($twig, $db)
 {
     include_once '../src/model/ProjetModel.php';
 
-    var_dump($_GET);
-
     $id = 1;
     if (isset($_GET["id"])) {
         $id = $_GET["id"];

@@ -43,6 +43,9 @@ Page ajouter
 
 	<div class="card">
 		<div class="m-4">
+
+
+			{% if taches|length > 0 %}
 			<h2>Liste des Taches :</h2>
 			<br>
 
@@ -55,11 +58,19 @@ Page ajouter
 			</p>
 
 			{% endfor %}
+
+			{% else %}
+			<h2>Aucune Tache</h2>
+
+			{% endif %}
 		</div>
 	</div>
 
 	<div class="card">
 		<div class="m-4">
+
+
+			{% if taches|length > 0 %}
 
 			<h2>Supprimer une Tache :</h2>
 			<form action="index.php?page=addTache" method="POST" class="encadre grande-margin-lr">
@@ -74,6 +85,11 @@ Page ajouter
 				<button type="submit" class="btn btn-primary m-4" name="btnSuppTache">Supprimer</button>
 
 			</form>
+
+			{% else %}
+			<h2>Aucune Tache à supprimer</h2>
+
+			{% endif %}
 		</div>
 	</div>
 

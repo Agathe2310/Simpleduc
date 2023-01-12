@@ -4,8 +4,6 @@ function addTacheController($twig, $db)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
-    var_dump($_POST);
-
     if (
         isset($_POST['tacheEtat'])
         && isset($_POST['tacheModule'])
@@ -28,7 +26,7 @@ function addTacheController($twig, $db)
         }
     }
 
-    if (isset($_POST["btnSuppTache"])) {
+    if (isset($_POST["btnSuppTache"]) && isset($_POST['cocheSupp'])) {
         foreach ($_POST["cocheSupp"] as $tache) {
             suppTache($db, $tache);
         }

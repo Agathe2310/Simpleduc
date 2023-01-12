@@ -3,7 +3,7 @@
 function modifTacheController($twig, $db)
 {
     include_once '../src/model/ProjetModel.php';
-
+    
     $id = 1;
     if (isset($_GET["id"])) {
         $id = $_GET["id"];

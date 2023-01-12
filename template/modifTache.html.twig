@@ -1,0 +1,62 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier une Tache{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <a href="index.php?page=addTache" style="text-decoration: none;">Retour</a>
+
+  {% if tache != "Cette tache n'existe pas !" %}
+
+  <h1>Modification de tache :</h1>
+  <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
+    <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
+      <div>
+        <p>Libellé : {{tache.Libelle}}</p>
+        <p>Etat : {{tache.Etat}}</p>
+        <p>Date de Début : {{tache.DateDebut}}</p>
+        <p>Date de Fin : {{tache.DateFin}}</p>
+        <p>Id du Module : {{tache.IDModule}}</p>
+
+      </div>
+
+      <form action="index.php?page=modifTache&id={{tache.IDTache}}" method="POST">
+
+        <p><input type="text" name="Libelle" id="Libelle" value="{{tache.Libelle}}"></p>
+        <p><input type="text" name="Etat" id="Etat" value="{{tache.Etat}}"></p>
+
+        <p><input type="date" name="DateDebut" id="DateDebut" value="{{tache.DateDebut}}"></p>
+        <p><input type="date" name="DateFin" id="DateFin" value="{{tache.DateFin}}"></p>
+
+        <p>
+          <select name="IDModule" id="Module" selected="{{tache.IDModule}}">
+            {% for module in modules %}
+            {% if module.IDModule == tache.IDModule %}
+            <option value="{{module.IDModule}}" selected>{{module.IDModule}}</option>
+            {% endif %}
+
+            {% if module.IDModule != tache.IDModule %}
+            <option value="{{module.IDModule}}">{{module.IDModule}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </p>
+
+        <button type="submit" name="IDTache" value="{{tache.IDTache}}">Modifier</button>
+      </form>
+
+    </div>
+  </div>
+
+  {% else %}
+  <div>
+    <p class="card bg-danger text-white p-3">
+      {{tache}}
+    </p>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}

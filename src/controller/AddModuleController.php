@@ -4,8 +4,6 @@ function addModuleController($twig, $db)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
-    var_dump($_POST);
-
     if (isset($_POST['moduleEtat']) && isset($_POST['moduleEquipe']) && isset($_POST['moduleContrat']) && isset($_POST['btnAddModule'])) { ##determiner si le tableau est definit btnAddProduct nom du bouton on regarde s'il existe lors d'un envoi de formulaire
         $etat = htmlspecialchars($_POST['moduleEtat']);
         $equipe = $_POST['moduleEquipe'];
@@ -19,7 +17,7 @@ function addModuleController($twig, $db)
         }
     }
 
-    if (isset($_POST["btnSuppModule"])) {
+    if (isset($_POST["btnSuppModule"]) && isset($_POST["cocheSupp"])) {
         foreach ($_POST["cocheSupp"] as $module) {
             suppModule($db, $module);
         }

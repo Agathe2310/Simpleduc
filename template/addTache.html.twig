@@ -1,47 +1,97 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	Page ajouter
+Page ajouter
 {% endblock %}
 
 {% block content %}
-	<h1>Ajouter un rendu</h1>
 
-	<div class="container">
-		<form
-			action="index.php?page=addRendu" method="POST" class="encadre grande-margin-lr">
-			<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
+
+<div class="container">
+	<div class="card">
+		<div class="m-4">
+			<h2>Ajouter une Tache :</h2>
+
+			<form action="index.php?page=addTache" method="POST" class="encadre ">
+
+				<p><label for="tacheLibelle" class="form-label">Libelle</label></p>
+				<p><input type="text" class="form-control" id="tacheLibelle" name="tacheLibelle"></p>
+
+				<p><label for="tacheEtat" class="form-label">Etat</label></p>
+				<p><input type="text" class="form-control" id="tacheEtat" name="tacheEtat"></p>
+
+				<p><label for="tacheModule" class="form-label">Module</label></p>
+				<p>
+					<select class="form-select" id="tacheModule" name="tacheModule">
+						{% for module in modules %}
+						<option value="{{module.IDModule}}">{{module.IDModule}} / {{module.Etat}}</option>
+						{% endfor %}
+					</select>
+				</p>
+
+				<p><label for="tacheDateDebut">Date de Début :</label></p>
+				<p><input type="date" name="tacheDateDebut" id="tacheDateDebut" value="1990-01-01"></p>
+
+				<p><label for="tacheDateFin">Date de Fin :</label></p>
+				<p><input type="date" name="tacheDateFin" id="tacheDateFin" value="1991-01-01"></p>
+
+				<p><button type="submit" class="btn btn-primary m-4" name="btnAddTache">Ajouter</button></p>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="m-4">
+
+
+			{% if taches|length > 0 %}
+			<h2>Liste des Taches :</h2>
+			<br>
+
+			{% for tache in taches %}
 			<p>
-				<label for="renduLabel" class="form-label">Libellé</label>
+				<a href="index.php?page=modifTache&id={{tache.IDTache}}" style="text-decoration: none;">Modifier</a>
+
+				{{tache.IDTache}}, Libellé : {{tache.Libelle}}, Etat : {{tache.Etat}}, Module : {{tache.IDModule}}
+				, Date de Début : {{tache.DateDebut}}, Date de Fin : {{tache.DateFin}}
 			</p>
-			<p><input type="text" class="form-control" id="renduLabel" name="renduLabel"></p>
-			<p>
-				<label for="renduDescription" class="form-label">Description</label>
-			</p>
-			<p>
-				<textarea class="form-control" id="renduDescription" name="renduDescription" rows="3"></textarea>
-			</p>
-			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
-			<p>
-				<label for="renduGroupe" class="form-label">Groupe</label>
-			</p>
-			<p>
-				<select class="form-select" id="renduGroupe" name="renduGroupe"></p>
-				<option value="">Saisir le groupe</option>
-				<option value="1">SN1</option>
-				<option value="2">SN2</option>
-			</p>
-		</select>
-		<p>
-			<label for="meeting-time">Date de début :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-start" value=""></p>
-		<p>
-			<label for="meeting-time">Date de fin :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-end" value=""></p>
-		<input type="hidden" name="prof" value="1">
-		<button type="submit" class="btn btn-primary" name="btnAddRendu">Ajouter</button>
-		<!-- On va vouloir détecter quand on appuie-->
-	</form>
+
+			{% endfor %}
+
+			{% else %}
+			<h2>Aucune Tache</h2>
+
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="m-4">
+
+
+			{% if taches|length > 0 %}
+
+			<h2>Supprimer une Tache :</h2>
+			<form action="index.php?page=addTache" method="POST" class="encadre grande-margin-lr">
+
+				{% for tache in taches %}
+				<p>
+					<input type="checkbox" name="cocheSupp[]" value="{{tache.IDTache}}">
+					<label for="{{tache.IDTache}}">{{tache.Etat}}</label>
+				</p>
+				{% endfor %}
+
+				<button type="submit" class="btn btn-primary m-4" name="btnSuppTache">Supprimer</button>
+
+			</form>
+
+			{% else %}
+			<h2>Aucune Tache à supprimer</h2>
+
+			{% endif %}
+		</div>
+	</div>
+
+	<br><br><br>
 </div>{% endblock %}

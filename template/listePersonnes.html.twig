@@ -4,17 +4,21 @@
 
 {% block content %}
   <h1>Liste des personnes</h1>
-  <form method='POST' action="index.php?page=listePersonnes">
+ 
     {% for personne in liste %}
       <div>
           <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}" />
             <p> Prénom: {{personne.Nom}}</p>
             <p> Nom: {{personne.Prenom}}</p>
+            <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
+            <a class="link" href="?page=addCoPersonne&id={{personne.IDPersonne}}">Ajouter les coordonnees</a>
           </div>
           <br>
+          <form method='POST' action="index.php?page=listePersonnes">
+          </form>
           {% endfor %}
-          <button type="submit" class="btn btn-dark" name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
-        </form>
+          <button type="submit" class="btn btn-dark"  name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
+
 
     
 {% endblock %}

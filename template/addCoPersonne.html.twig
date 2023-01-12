@@ -1,0 +1,42 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Ajouter des coordonnées{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Ajouter des coordonnées :</h1>
+  <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
+    <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
+      <div>
+        <div class="container">
+            <p>Nom: {{personne.Nom}}</p>
+            <p>Prenom: {{personne.Prenom}}</p>
+          <form enctype="multipart/form-data" method="post" id="{{personne.IDPersonne}}">
+            <label for="nom" class="form-label">
+				Rue
+			</label>
+            <input type="text" value="" name="Rue" id='Rue'/>
+
+            <label for="nom" class="form-label">
+				Code Postal
+			</label>
+            <input type="text" value="" name="CodePostal" id="CodePostal"/>
+
+            <label for="nom" class="form-label">
+				Ville
+			</label>
+            <input type="text" value="" name="Ville" id="Ville"/>
+
+            <label for="nom" class="form-label">
+				Email
+			</label><input type="text" value="" name="Email" id="Email"/>
+
+            <button type="submit" class="btn btn-dark" name="btnAddCoPersonne" value="{{personne.IDPersonne}}">
+                Ajouter </button>
+        </form>
+        
+      </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier une personne{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Modification :</h1>
+  <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
+    <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
+      <div>
+        <div class="container">
+          <form method="post" id="{{personne.IDPersonne}}">
+            <input type="text" value="{{personne.Nom}}" name="Nom"/>
+            <input type="text" value="{{personne.Prenom}}" name="Prénom"/>
+            <button type="submit" class="btn btn-dark" name="btnModifierPersonne"  value="{{personne.IDPersonne}}" >
+              Modifier </button>
+            </form>
+            <form method="post" action="index.php?page=listePersonnes">
+              <button type="submit" class="btn btn-dark" name="Revenir" action="index.php?page=listePersonnes" >
+                  Revenir à la liste </button>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

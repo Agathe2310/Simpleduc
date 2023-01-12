@@ -1,0 +1,17 @@
+
+{% block content %}
+<h1>Liste des personnes</h1>
+
+  {% for co in liste %}
+    <div>
+        <p> Nom: {{co.Nom}}</p>
+        <p>Prénom: {{co.Prenom}}</p>
+          <p> Rue: {{co.Rue}}</p>
+          <p> Code postal: {{co.Code_Postal}}</p>
+          <p> Ville: {{co.Ville}}</p>
+          <p> Email: {{co.email}}</p>
+          <a class="link" href="?page=modifCoPersonne&id={{co.IDPersonne}}">Modifier les coordonnees</a>
+   {% endfor %}
+
+  
+{% endblock %}

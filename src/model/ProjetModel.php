@@ -71,7 +71,6 @@ function updateModule($db, $id, $contrat, $equipe, $etat)
 }
 
 
-
 function getAllEquipes($db)
 {
     $query = $db->prepare("SELECT IDEquipe, IDPersonne FROM Equipe");
@@ -91,3 +90,24 @@ function getAllContrats($db)
 
     return $product;
 }
+
+function listePersonnes($db){
+    $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
+    $query -> execute([]);
+    $liste = $query->fetchAll();
+    return $liste;
+}
+
+
+function deletePersonne($db, $IDPersonne){
+    $query = $db -> prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne "); 
+    return $query->execute([
+        'IDPersonne' => $IDPersonne
+    ]);
+    }
+
+#function addCoPersonne($db, $rue, $ville, $code_postal, $email)
+#{
+#    $query = $db->prepare("INSERT INTO Coordonnees (Rue, Ville, Code_Postal, email, IDPersonne) VALUES (:Rue, :Ville, :Code_Postal, :email, ")
+#
+#}

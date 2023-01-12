@@ -8,5 +8,6 @@ $routes = [
     'addEntreprise' => 'addEntrepriseController',
     'addModule' => 'addModuleController',
     'addTache' => 'addTacheController',
+    'listePersonnes' => 'listePersonnesController',
     'modifModule' => 'modifModuleController'
 ];

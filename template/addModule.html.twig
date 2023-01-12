@@ -51,14 +51,19 @@ Page ajouter
 
 	<div class="card">
 		<div class="m-4">
-			<h2>Liste des Modules :</h2>
-			<br>
+			<form action="index.php?page=modifModule" method="POST" class="encadre ">
+				<h2>Liste des Modules :</h2>
+				<br>
 
-			{% for module in modules %}
-			<p>{{module.IDModule}}, Etat : {{module.Etat}}, Equipe : {{module.IDEquipe}}, Contrat : {{module.IDContrat}}
-			</p>
+				{% for module in modules %}
+				<p>
+					<button type="submit" class="btn btn-primary" name="btnModModule" value="{{module.IDModule}}">Modifier</button>
+					{{module.IDModule}}, Etat : {{module.Etat}}, Equipe : {{module.IDEquipe}}, Contrat :
+					{{module.IDContrat}}
+				</p>
 
-			{% endfor %}
+				{% endfor %}
+			</form>
 		</div>
 	</div>
 
@@ -70,12 +75,12 @@ Page ajouter
 
 				{% for module in modules %}
 				<p>
-					<input type="checkbox" name="{{module.IDModule}}" id="{{module.IDModule}}" value="supp">
+					<input type="checkbox" name="cocheSupp[]" value="{{module.IDModule}}">
 					<label for="{{module.IDModule}}">{{module.Etat}}</label>
 				</p>
 				{% endfor %}
 
-				<button type="submit" class="btn btn-primary m-4" name="btnASuppModule">Ajouter</button>
+				<button type="submit" class="btn btn-primary m-4" name="btnSuppModule">Supprimer</button>
 
 			</form>
 		</div>

@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier les coordonnées{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Modification :</h1>
+  <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
+    <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
+      <div>
+        <div class="container">
+          <form method="post" id="{{co.IDPersonne}}">
+            <input type="text" value="{{co.Rue}}" name="Rue"/>
+            <input type="text" value="{{co.Code_Postal}}" name="CodePostal"/>
+            <input type="text" value="{{co.Ville}}" name="Ville"/>
+            <input type="text" value="{{co.email}}" name="email"/>
+            <button type="submit" class="btn btn-dark" name="btnModCo" value="{{co.IDPersonne}}" form="{{co.IDPersonne}}">
+            
+              Modifier </button>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

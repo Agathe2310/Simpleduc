@@ -150,6 +150,25 @@ function getAllContrats($db)
     return $product;
 }
 
+function getPersonne($db, $IDPersonne){
+    $query = $db->prepare("SELECT Nom, Prenom FROM Personne WHERE :IDPersonne = IDPersonne");
+    $query ->execute([
+        'IDPersonne' => $IDPersonne,
+    ]);
+    $product = $query->fetch();
+
+    return $product;
+}
+
+function updatePersonne($db, $nom, $prenom, $IDPersonne){
+    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne "); 
+    return $query->execute([
+        'Nom' => $nom,
+        'Prenom' => $prenom,
+        'IDPersonne' => $IDPersonne
+    ]);
+    }
+
 function listePersonnes($db){
     $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
     $query -> execute([]);
@@ -164,16 +183,6 @@ function deletePersonne($db, $IDPersonne){
         'IDPersonne' => $IDPersonne
     ]);
     }
-
-
-
-
-
-#function addCoPersonne($db, $rue, $ville, $code_postal, $email)
-#{
-#    $query = $db->prepare("INSERT INTO Coordonnees (Rue, Ville, Code_Postal, email, IDPersonne) VALUES (:Rue, :Ville, :Code_Postal, :email, ")
-#
-#}
 
 
 
@@ -193,6 +202,27 @@ function getAllTaches($db) {
     $query = $db->prepare("SELECT IDTache, Libelle, Etat, DateDebut, DateFin, IDModule FROM Tache");
     $query->execute([]);
 
+    $product = $query->fetchAll();
+
+    return $product;
+}
+
+function addCoPersonne($db, $Rue, $Ville, $CodePostal, $Email, $IDPersonne)
+{
+    $query = $db->prepare("INSERT INTO Coordonnees(Rue, Ville, Code_Postal, email, IDPersonne) VALUES (:Rue, :Ville, :Code_Postal, :email, :IDPersonne)");
+    return $query->execute([
+        'IDPersonne' => $IDPersonne,
+        'Rue' => $Rue,
+        'Ville' => $Ville,
+        'Code_Postal' => $CodePostal,
+        'email' => $Email,
+    ]);
+    }
+
+function getAllCo($db){
+    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = Personne.IDPersonne");
+    $query ->execute([
+    ]);
     $product = $query->fetchAll();
 
     return $product;
@@ -232,3 +262,24 @@ function updateTache($db, $id, $libelle, $etat, $dateDebut, $dateFin, $module)
         'IDTache' => $id
     ]);
 }
+
+function getCo($db, $IDPersonne){
+    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = :IDPersonne AND Personne.IDPersonne");
+    $query ->execute([
+        'IDPersonne'=> $IDPersonne, ]);
+    $product = $query->fetch();
+
+    return $product;
+}
+
+
+function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
+    $query = $db -> prepare("UPDATE Coordonnees SET Rue = :Rue, Code_Postal = :CodePostal, Ville = :Ville, email = :email WHERE IDPersonne = :IDPersonne "); 
+    return $query->execute([
+        'Rue' => $Rue,
+        'CodePostal' => $CodePostal,
+        'Ville' => $Ville,
+        'email' => $Email, 
+        'IDPersonne' => $IDPersonne,
+    ]);
+    }

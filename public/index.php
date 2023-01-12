@@ -8,6 +8,7 @@ require_once '../src/twig.php';
 require_once '../src/database.php';
 
 session_start();
+var_dump("Session :");
 var_dump($_SESSION);
 
 $db = getConnection($config);

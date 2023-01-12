@@ -2,7 +2,7 @@
 
 function initRouter($routes, $db)
 {
-    if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['username']) || (isset($_GET['page']) && $_GET['page'] == 'register')) {
         //Si la variable page existe donc dans l'url on a mis ?page=truc alors $page devient ?page
         if (isset($_GET['page'])) {
             $page = $_GET['page'];

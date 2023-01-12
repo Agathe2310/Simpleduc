@@ -9,7 +9,11 @@ require_once '../src/database.php';
 
 session_start();
 
-$_SESSION['username'] = "Le futur username mis par agathe et antoine";
+if (isset($_SESSION['deconnexion'])) {
+    session_destroy();
+    session_start();
+}
+
 
 var_dump("Session :");
 var_dump($_SESSION);

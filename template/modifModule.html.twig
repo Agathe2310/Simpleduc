@@ -1,0 +1,72 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier un Module{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <a href="index.php?page=addModule" style="text-decoration: none;">Retour</a>
+
+  {% if module != "Ce module n'existe pas !" %}
+
+  <h1>Modification de module :</h1>
+  <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
+    <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
+      <div>
+        <p>Etat : {{module.Etat}}</p>
+        <p>Contrat : {{module.IDContrat}}</p>
+        <p>Equipe : {{module.IDEquipe}}</p>
+
+      </div>
+
+      <form action="index.php?page=modifModule" method="POST">
+
+        <p>
+          <input type="text" name="Etat" id="Etat" value="{{module.Etat}}">
+        </p>
+
+        <p>
+          <select name="IDContrat" id="Contrat" selected="{{module.IDContrat}}">
+            {% for contrat in contrats %}
+            {% if contrat.IDContrat == module.IDContrat %}
+            <option value="{{contrat.IDContrat}}" selected>{{contrat.IDContrat}}</option>
+            {% endif %}
+
+            {% if contrat.IDContrat != module.IDContrat %}
+            <option value="{{contrat.IDContrat}}">{{contrat.IDContrat}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </p>
+
+        <p>
+          <select name="IDEquipe" id="Equipe" selected="{{module.IDEquipe}}">
+            {% for equipe in equipes %}
+            {% if equipe.IDEquipe == module.IDEquipe %}
+            <option value="{{equipe.IDEquipe}}" selected>{{equipe.IDEquipe}}</option>
+            {% endif %}
+
+            {% if equipe.IDEquipe != module.IDEquipe %}
+            <option value="{{equipe.IDEquipe}}">{{equipe.IDEquipe}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </p>
+
+        <button type="submit" name="IDModule" value="{{module.IDModule}}">Modifier</button>
+      </form>
+
+    </div>
+  </div>
+
+  {% else %}
+  <div>
+    <p class="card bg-danger text-white p-3">
+      {{module}}
+    </p>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}

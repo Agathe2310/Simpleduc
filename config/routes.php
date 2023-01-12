@@ -18,5 +18,7 @@ $routes = [
     'modifPersonne' => 'modifPersonneController',
     'addCoPersonne' => 'addCoPersonneController',
     'listeCo' => 'listeCoController',
-    'modifCoPersonne' => 'modifCoController'
+    'modifCoPersonne' => 'modifCoController',
+    'login' => 'loginController',
+    'register' => 'registerController',
 ];

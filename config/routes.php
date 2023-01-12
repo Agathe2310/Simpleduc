@@ -7,5 +7,6 @@ $routes = [
     'addProduct' => 'addProductController',
     'addEntreprise' => 'addEntrepriseController',
     'addModule' => 'addModuleController',
-    'addTache' => 'addTacheController'
+    'addTache' => 'addTacheController',
+    'listePersonnes' => 'listePersonnesController',
 ];

@@ -1,0 +1,20 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste des personnes !{% endblock %}
+
+{% block content %}
+  <h1>Liste des personnes</h1>
+  <form method='POST' action="index.php?page=listePersonnes">
+    {% for personne in liste %}
+      <div>
+          <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}" />
+            <p> Prénom: {{personne.Nom}}</p>
+            <p> Nom: {{personne.Prenom}}</p>
+          </div>
+          <br>
+          {% endfor %}
+          <button type="submit" class="btn btn-dark" name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
+        </form>
+
+    
+{% endblock %}

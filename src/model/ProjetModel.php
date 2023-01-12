@@ -37,6 +37,42 @@ function getAllContrat($db)
     return $allContrat;
 }
 
+function getOneContrat($db, $IDContrat){
+    $query = $db->prepare("SELECT DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre 
+                            FROM Contrat
+                            WHERE IDContrat = :IDContrat ");
+    $query->execute([
+        'IDContrat' => $IDContrat
+    ]);
+    $oneContrat = $query->fetch();
+    return $oneContrat;
+}
+
+function modifierContrat($db, $IDContrat, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre) 
+{
+    $query = $db->prepare("UPDATE Contrat
+                            SET DateSignature = :DateSignature, CoutGlobal = :CoutGlobal, DateDebut = :DateDebut, DateFin = :DateFin, IDPersonne = :IDPersonne, IDEntre = :IDEntre
+                            WHERE IDContrat = :IDContrat ");
+    $query->execute([
+        'IDContrat' => $IDContrat,
+        'DateSignature' => $DateSignature,
+        'CoutGlobal' => $CoutGlobal,
+        'DateDebut' => $DateDebut,
+        'DateFin' => $DateFin,
+        'IDPersonne' => $IDPersonne,
+        'IDEntre' => $IDEntre,
+    ]);
+}
+
+function supprimerContrat($db, $IDContrat)
+{
+    $query = $db->prepare("DELETE FROM Contrat
+                            WHERE IDContrat = :IDContrat ");
+    $query->execute([
+        'IDContrat' => $IDContrat
+    ]);
+}
+
 function getAllEntreprise($db)
 {
     $query = $db->prepare("SELECT IDEntre, Nom

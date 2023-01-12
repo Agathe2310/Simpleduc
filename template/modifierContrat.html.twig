@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Page ajouter
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% if Contrat.DateSignature != null %}
+			<a class="link" href="?page=addContrat">Retour</a>
+			<form enctype="multipart/form-data" method="post">
+				ID du Contrat :
+				{{Contrat.IDContrat}}
+                <p>Date de Signature :
+				<input type="date" value="{{Contrat.DateSignature}}" name="modifierDateSignature"/></p>
+				<p>Cout Global du Contrat :
+                <input type="number" value="{{Contrat.CoutGlobal}}" name="modifierCoutGlobal" step="0.01"/>
+				<p>Date de Début du Contrat :
+                <input type="date" value="{{Contrat.DateDebut}}" name="modifierDateDebut"/>
+				<p>Date de Fin du Contrat :
+                <input type="date" value="{{Contrat.DateFin}}" name="modifierDateFin"/>
+				<p>ID Personne :
+                <input type="number" value="{{Contrat.IDPersonne}}" name="modifierIDPersonne"/>
+				<p>ID Entreprise :
+                <input type="number" value="{{Contrat.IDEntre}}" name="modifierIDEntre"/>
+				<input type="submit" name="modifierContrat">
+			</form>
+		{% else %}
+			<p class="card bg-danger text-white p-3">
+				ID n'est pas dans la base de données</p>
+		{% endif %}
+	</div>
+{% endblock %}

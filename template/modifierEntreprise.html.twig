@@ -5,11 +5,18 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
+    <div class="container">
+    {% if NomEntreprise.Nom != null %}
+	
+        <a class="link" href="?page=addEntreprise">Retour</a>
 			<form enctype="multipart/form-data" method="post" id="{{entreprise.IDEntre}}">
-				<input type="text" value="{{IDEntreprise}}" name="modifierIDEntreprise"/>
-				<input type="text" value="{{NomEntreprise.Nom}}" name="modifierNomEntreprise"/>
+				ID de l'Entreprise : {{IDEntreprise}}
+                <p>Nom de l'Entreprise :
+				<input type="text" value="{{NomEntreprise.Nom}}" name="modifierNomEntreprise"/> </p>
 				<input type="submit" name="modifierEntreprise">
 			</form>
-	</div>
+    {% else %}
+        <p class="card bg-danger text-white p-3"> ID n'est pas dans la base de données</p>
+    {% endif %}
+    </div>
 {% endblock %}

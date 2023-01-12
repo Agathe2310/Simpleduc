@@ -14,12 +14,12 @@
 				<label for="DateSignature" class="form-label">Date de la Signature</label>
 			</p>
 			<p>
-				<input type="text" class="form-control" id="DateSignature" name="DateSignature"></p>
+				<input type="date" class="form-control" id="DateSignature" name="DateSignature"></p>
 			</p>
 				<label for="CoutGlobal" class="form-label">Cout Global</label>
 			</p>
 			<p>
-				<input type="number" class="form-control" id="CoutGlobal" name="CoutGlobal">
+				<input type="number" class="form-control" id="CoutGlobal" name="CoutGlobal" step="0.01">
 			</p>
 			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
 			<p>
@@ -58,12 +58,11 @@
 			<p> Fin du Contrat  : {{contrat.DateFin}} <p>
 			<p> IDPersonne : {{contrat.IDPersonne}} </p>
 			<p> IDEntre : {{contrat.IDEntre}}</p>
-			<form enctype="multipart/form-data" method="post" id="{{fichier.iddevoir}}">
-			<input type="hidden" value="{{fichier.iddevoir}}" name="supprimerFichier"/>
-			<input type="submit" value="X" name="supprimerFichierSubmit"/>
-			<br> {# Surtout ne pas garder ce br !!!!!!!!!!!! c juste temporaire #}
-			</form>
-			<button type="submit" value="submitSupprimerFichier" form="{{fichier.iddevoir}}">X</button>
+			<form enctype="multipart/form-data" method="post" id="{{contrat.IDContrat}}">
+				<input type="hidden" value="{{contrat.IDContrat}}" name="supprimerContrat"/>
+				</form>
+				<button type="submit" name="submitSupprimerContrat" form="{{contrat.IDContrat}}">Supprimer Contrat</button>
+			<a class="link" href="?page=modifierContrat&id={{contrat.IDContrat}}">Modifier ce contrat</a>
 		</div>
 		{% endfor %}
 </div>{% endblock %}

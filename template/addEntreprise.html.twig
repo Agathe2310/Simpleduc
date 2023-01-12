@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Ajouter un rendu</h1>
+	<h1>Ajouter une Entreprise dans la base de donnée</h1>
 
 	<div class="container">
 		<form
-			action="index.php?page=addRendu" method="POST" class="encadre grande-margin-lr">
+			action="index.php?page=addEntreprise" method="POST" class="encadre grande-margin-lr">
 			<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
 			<p>
-				<label for="renduLabel" class="form-label">Libellé</label>
+				<label for="renduLabel" class="form-label">Nom de l'entreprise</label>
 			</p>
-			<p><input type="text" class="form-control" id="renduLabel" name=""></p>
-			<p>
+			<p><input type="text" class="form-control" id="renduLabel" name="nomEntreprise"></p>
+			{#<p>
 				<label for="renduDescription" class="form-label">Description</label>
 			</p>
 			<p>
@@ -40,8 +40,21 @@
 			<label for="meeting-time">Date de fin :</label>
 		</p>
 		<p><input type="datetime-local" id="meeting-time" name="trip-end" value=""></p>
-		<input type="hidden" name="prof" value="1">
-		<button type="submit" class="btn btn-primary" name="btnAddRendu">Ajouter</button>
+		<input type="hidden" name="prof" value="1"> #}
+		<button type="submit" class="btn btn-primary" name="btnAddEntreprise">Ajouter</button>
 		<!-- On va vouloir détecter quand on appuie-->
 	</form>
-</div>{% endblock %}
+	</div>
+	<br>
+	{% for entreprise in allEntreprise %}
+		<div class="container">
+    		<p> IDEntreprise : {{entreprise.IDEntre}}</p>
+			<p> NomEntreprise : {{entreprise.Nom}}</p>
+			<form enctype="multipart/form-data" method="post" id="{{entreprise.IDEntre}}">
+			<input type="hidden" value="{{entreprise.IDEntre}}" name="supprimerEntreprise"/>
+			</form>
+			<button type="submit" name="submitSupprimerEntreprise" form="{{entreprise.IDEntre}}">Supprimer Entreprise</button>
+			<a class="link" href="?page=modifierEntreprise&id={{entreprise.IDEntre}}">Modifier</a>
+		</div>
+	{% endfor %}
+{% endblock %}

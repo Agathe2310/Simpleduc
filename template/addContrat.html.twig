@@ -5,43 +5,65 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Ajouter un rendu</h1>
+	<h1>Contrat</h1>
 
 	<div class="container">
 		<form
-			action="index.php?page=addRendu" method="POST" class="encadre grande-margin-lr">
-			<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
+			action="index.php?page=addContrat" method="POST" class="encadre grande-margin-lr">
 			<p>
-				<label for="renduLabel" class="form-label">Libellé</label>
-			</p>
-			<p><input type="text" class="form-control" id="renduLabel" name="renduLabel"></p>
-			<p>
-				<label for="renduDescription" class="form-label">Description</label>
+				<label for="DateSignature" class="form-label">Date de la Signature</label>
 			</p>
 			<p>
-				<textarea class="form-control" id="renduDescription" name="renduDescription" rows="3"></textarea>
+				<input type="text" class="form-control" id="DateSignature" name="DateSignature"></p>
+			</p>
+				<label for="CoutGlobal" class="form-label">Cout Global</label>
+			</p>
+			<p>
+				<input type="number" class="form-control" id="CoutGlobal" name="CoutGlobal">
 			</p>
 			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
 			<p>
-				<label for="renduGroupe" class="form-label">Groupe</label>
+				<label for="DateDebut" class="form-label">Date Début</label>
 			</p>
 			<p>
-				<select class="form-select" id="renduGroupe" name="renduGroupe"></p>
-				<option value="">Saisir le groupe</option>
-				<option value="1">SN1</option>
-				<option value="2">SN2</option>
+				<input type="date" class="form-control" id="DateDebut" name="DateDebut">
 			</p>
-		</select>
-		<p>
-			<label for="meeting-time">Date de début :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-start" value=""></p>
-		<p>
-			<label for="meeting-time">Date de fin :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-end" value=""></p>
-		<input type="hidden" name="prof" value="1">
-		<button type="submit" class="btn btn-primary" name="btnAddRendu">Ajouter</button>
+			<p>
+				<label for="DateFin" class="form-label">Date Fin</label>
+			</p>
+			<p>
+				<input type="date" class="form-control" id="DateFin" name="DateFin">
+			</p>
+			<p>
+				<label for="idPersonne" class="form-label">ID Personne</label>
+			</p>
+			<p>
+				<input type="number" min="1" step="1" class="form-control" id="idPersonne" name="idPersonne">
+			</p>
+			<p>
+				<label for="idEntre" class="form-label">ID Entreprise</label>
+			</p>
+			<p>
+				<input type="number" min="1" step="1" class="form-control" id="idEntre" name="idEntre">
+			</p>
+		<button type="submit" class="btn btn-primary" name="btnAddContrat">Ajouter</button>
 		<!-- On va vouloir détecter quand on appuie-->
 	</form>
+	{% for contrat in allContrat %}
+		<div class="container">
+    		<p> Numéro du contrat : {{contrat.IDContrat}} <p>
+			<p> Date Signature : {{contrat.DateSignature}} </p>
+			<p> CoutGlobal : {{contrat.CoutGlobal}} <p>
+			<p> Début du contrat : {{contrat.DateDebut}} </p>
+			<p> Fin du Contrat  : {{contrat.DateFin}} <p>
+			<p> IDPersonne : {{contrat.IDPersonne}} </p>
+			<p> IDEntre : {{contrat.IDEntre}}</p>
+			<form enctype="multipart/form-data" method="post" id="{{fichier.iddevoir}}">
+			<input type="hidden" value="{{fichier.iddevoir}}" name="supprimerFichier"/>
+			<input type="submit" value="X" name="supprimerFichierSubmit"/>
+			<br> {# Surtout ne pas garder ce br !!!!!!!!!!!! c juste temporaire #}
+			</form>
+			<button type="submit" value="submitSupprimerFichier" form="{{fichier.iddevoir}}">X</button>
+		</div>
+		{% endfor %}
 </div>{% endblock %}

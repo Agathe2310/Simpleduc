@@ -1,0 +1,15 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Page ajouter
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+			<form enctype="multipart/form-data" method="post" id="{{entreprise.IDEntre}}">
+				<input type="text" value="{{IDEntreprise}}" name="modifierIDEntreprise"/>
+				<input type="text" value="{{NomEntreprise.Nom}}" name="modifierNomEntreprise"/>
+				<input type="submit" name="modifierEntreprise">
+			</form>
+	</div>
+{% endblock %}

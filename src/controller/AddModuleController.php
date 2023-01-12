@@ -18,7 +18,11 @@ function addModuleController($twig,$db){
     }
 
     if (isset($_POST["btnASuppModule"]) && isset($_POST["suppModuleSelect"])) {
-        suppModule($db, $_POST["suppModuleSelect"]);
+        while (in_array("supp", $_POST)) {
+            $module = array_search("supp", $_POST);
+            suppModule($db, $module);
+            $_POST[$module] = null;
+        }
     }
 
     echo $twig -> render("addModule.html.twig", [

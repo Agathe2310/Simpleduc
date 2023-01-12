@@ -47,6 +47,29 @@ function getAllModules($db)
     return $product;
 }
 
+function getModule($db, $id)
+{
+    $query = $db->prepare("SELECT IDModule, Etat, IDEquipe, IDContrat FROM Module WHERE :IDModule = IDModule");
+    $query->execute([
+        'IDModule' => $id
+    ]);
+
+    $product = $query->fetch();
+
+    return $product;
+}
+
+function updateModule($db, $id, $contrat, $equipe, $etat)
+{
+    $query = $db->prepare("UPDATE Module SET IDContrat = :IDContrat, IDEquipe = :IDEquipe, Etat = :Etat WHERE IDModule = :IDModule ");
+    $query->execute([
+        'IDContrat' => $contrat,
+        'IDEquipe' => $equipe,
+        'IDModule' => $id,
+        'Etat' => $etat,
+    ]);
+}
+
 
 
 function getAllEquipes($db)

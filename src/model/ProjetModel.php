@@ -56,7 +56,8 @@ function getModule($db, $id)
 
     $product = $query->fetch();
 
-    return $product;
+    if ($product != null ) return $product;
+    else return "Ce module n'existe pas !";
 }
 
 function updateModule($db, $id, $contrat, $equipe, $etat)

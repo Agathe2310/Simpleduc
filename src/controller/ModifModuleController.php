@@ -3,17 +3,18 @@
 function modifModuleController($twig, $db)
 {
     include_once '../src/model/ProjetModel.php';
-    var_dump($_POST);
+
+    var_dump($_GET);
 
     $id = 1;
-    if (isset($_POST["btnModModule"])) {
-        $id = $_POST["btnModModule"];
+    if (isset($_GET["id"])) {
+        $id = $_GET["id"];
     }
 
-    if (isset($_POST['btnModifModule'])) {
+    if (isset($_POST['IDModule'])) {
         updateModule(
             $db,
-            $_POST["btnModifModule"],
+            $_POST["IDModule"],
             $_POST["IDContrat"],
             $_POST["IDEquipe"],
             $_POST["Etat"]

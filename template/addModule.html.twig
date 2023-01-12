@@ -51,20 +51,18 @@ Page ajouter
 
 	<div class="card">
 		<div class="m-4">
-			<form action="index.php?page=modifModule" method="POST" class="encadre ">
 				<h2>Liste des Modules :</h2>
 				<br>
 
 				{% for module in modules %}
 				<p>
-					<button type="submit" class="btn btn-primary" name="btnModModule"
-						value="{{module.IDModule}}">Modifier</button>
+					<a href="index.php?page=modifModule&id={{module.IDModule}}" style="text-decoration: none;">Modifier</a>
+
 					{{module.IDModule}}, Etat : {{module.Etat}}, Equipe : {{module.IDEquipe}}, Contrat :
 					{{module.IDContrat}}
 				</p>
 
 				{% endfor %}
-			</form>
 		</div>
 	</div>
 

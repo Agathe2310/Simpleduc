@@ -8,6 +8,9 @@ require_once '../src/twig.php';
 require_once '../src/database.php';
 
 session_start();
+
+$_SESSION['username'] = "Le futur username mis par agathe et antoine";
+
 var_dump("Session :");
 var_dump($_SESSION);
 

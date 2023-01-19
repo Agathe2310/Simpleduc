@@ -13,17 +13,19 @@ function registerController($twig, $db)
             $_POST['registerEmail'] != "" && $_POST['registerPassword'] != "" &&
             $_POST['registerNom'] != "" && $_POST['registerPrenom'] != ""
         ) {
-            var_dump($_POST);
+            if (strlen($_POST['registerPassword']) >= 3) {
+                var_dump($_POST);
 
-            $email = $_POST['registerEmail'];
-            $password = $_POST['registerPassword'];
-            $nom = $_POST['registerNom'];
-            $prenom = $_POST['registerPrenom'];
+                $email = $_POST['registerEmail'];
+                $password = $_POST['registerPassword'];
+                $nom = $_POST['registerNom'];
+                $prenom = $_POST['registerPrenom'];
 
-            if (!testEmailExists($db, $email)) {
-                addPersonneComplet($db, $nom, $prenom, $email, password_hash($password, PASSWORD_DEFAULT));
-                $erreur = "compte cree";
-            } else $erreur = "existe deja";
+                if (!testEmailExists($db, $email)) {
+                    addPersonneComplet($db, $nom, $prenom, $email, password_hash($password, PASSWORD_DEFAULT));
+                    $erreur = "compte cree";
+                } else $erreur = "existe deja";
+            } else $erreur = "mdp trop court";
         } else $erreur = "remplir champs";
     }
 

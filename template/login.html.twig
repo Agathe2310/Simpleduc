@@ -16,6 +16,9 @@
       <p style="color: green;">Connecté !</p>
       {% endif %}
       {% endif %}
+      {% if user == "remplir champs" %}
+      <p style="color: red;">Veuillez remplir tous les champs !</p>
+      {% endif %}
       <form action="?page=login" method="post">
         <br>
 

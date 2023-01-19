@@ -332,17 +332,16 @@ function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
     ]);
 }
 
-function testOneUser($db, $email, $password) {
-    $query = $db->prepare("SELECT Nom, Prenom, IDPersonne FROM Personne WHERE :Email = Email AND :PasswordUser = PasswordUser ");
+
+function getOneUser($db, $email) {
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email FROM Personne WHERE :Email = Email");
     $query ->execute([
-        'Email'=> $email,
-        'PasswordUser' => $password
+        'Email'=> $email
     ]);
     $user = $query->fetch();
 
     return $user;
 }
-
 
 
 function testEmailExists($db, $email) {

@@ -21,6 +21,10 @@
       <p style="color: green;">Compte créé !</p>
       {% endif %}
 
+      {% if erreur == "mdp trop court" %}
+      <p style="color: red;">Mot de passe trop court (Minimum 3 caractères) !</p>
+      {% endif %}
+
       <form action="?page=register" method="POST">
         <br>
 

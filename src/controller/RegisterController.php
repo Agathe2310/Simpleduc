@@ -1,8 +1,12 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 function registerController($twig, $db)
 {
+
     include_once '../src/model/ProjetModel.php';
+    include_once '../src/model/MailModel.php';
 
     $erreur = 0;
 
@@ -24,6 +28,28 @@ function registerController($twig, $db)
                 if (!testEmailExists($db, $email)) {
                     addPersonneComplet($db, $nom, $prenom, $email, password_hash($password, PASSWORD_DEFAULT));
                     $erreur = "compte cree";
+
+                    $idUser = getOneUser($db, $email)['IDPersonne'];
+
+                    $mail2 = new Mail();
+
+                    //Création vérif
+                    $idRegister = addConfirmationCompte($db, $idUser);
+                    var_dump("ID REGISTER :");
+                    var_dump($idRegister);
+
+                    //Envoyer mail
+                    if ($idRegister != null) {
+                        $mail2->envoyerMailer(
+                            $email,
+                            "Confirmer le compte PHP",
+                            $twig->render("mail/register_message.html.twig", [
+                                'email' => $email,
+                                'idRegister' => $idRegister
+                            ]),
+                            null
+                        );
+                    }
                 } else $erreur = "existe deja";
             } else $erreur = "mdp trop court";
         } else $erreur = "remplir champs";

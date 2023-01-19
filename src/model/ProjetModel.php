@@ -334,7 +334,7 @@ function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
 
 
 function getOneUser($db, $email) {
-    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email FROM Personne WHERE :Email = Email");
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie FROM Personne WHERE :Email = Email");
     $query ->execute([
         'Email'=> $email
     ]);

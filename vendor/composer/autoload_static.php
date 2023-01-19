@@ -21,6 +21,10 @@ class ComposerStaticInitf0bb004673b16b6658123e5f9d5b59f6
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'L' => 
         array (
             'Login8060\\Shop\\' => 15,
@@ -39,6 +43,10 @@ class ComposerStaticInitf0bb004673b16b6658123e5f9d5b59f6
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Login8060\\Shop\\' => 
         array (

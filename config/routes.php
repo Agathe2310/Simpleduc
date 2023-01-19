@@ -21,5 +21,6 @@ $routes = [
     'modifCoPersonne' => 'modifCoController',
     'login' => 'loginController',
     'register' => 'registerController',
-    'deconnexion' => 'deconnexionController'
+    'deconnexion' => 'deconnexionController',
+    'confirmRegister' => 'confirmRegisterController'
 ];

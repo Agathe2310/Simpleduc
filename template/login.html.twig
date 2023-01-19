@@ -19,6 +19,9 @@
       {% if user == "remplir champs" %}
       <p style="color: red;">Veuillez remplir tous les champs !</p>
       {% endif %}
+      {% if user == "pas verifie" %}
+      <p style="color: red;">Votre compte n'est pas vérifié !</p>
+      {% endif %}
       <form action="?page=login" method="post">
         <br>
 

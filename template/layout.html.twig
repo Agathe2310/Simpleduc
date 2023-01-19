@@ -27,7 +27,11 @@
                     <li class="nav-item"><a href="?page=addContrat" class="nav-link">Contrat</a></li>
                     <li class="nav-item"><a href="?page=addTache" class="nav-link">Tache</a></li>
                     <li class="nav-item"><a href="?page=addModule" class="nav-link">Module</a></li>
+                    {% if session.login is defined %}
                     <li class="nav-item"><a href="?page=deconnexion" class="nav-link">Deconnexion</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="?page=login" class="nav-link">Connexion</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

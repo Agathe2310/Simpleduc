@@ -8,20 +8,20 @@
   <div class="card bg-grey mx-auto" style="width: 30%;">
     <div class="m-5 ">
       <h1>Login</h1>
-      <form action="?page=login">
+      <form action="?page=login" method="post">
         <br>
 
         <p>
-          <label for="username">Username :</label>
-          <input type="text" name="username" placeholder="Username">
+          <label for="emailLogin">Username :</label>
+          <input type="email" name="emailLogin" placeholder="Username">
         </p>
 
         <p>
-          <label for="password">Password :</label>
-          <input type="password" name="password" placeholder="Password">
+          <label for="passwordLogin">Password :</label>
+          <input type="password" name="passwordLogin" placeholder="Password">
         </p>
 
-        <input type="submit" value="Login" class="btn btn-primary">
+        <input type="submit" name="submitLogin" class="btn btn-primary">
       </form>
 
       <a href="?page=register">Register</a>

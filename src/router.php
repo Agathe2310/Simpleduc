@@ -2,29 +2,30 @@
 
 function initRouter($routes, $db)
 {
-    if (isset($_SESSION['username']) || (isset($_GET['page']) && $_GET['page'] == 'register')) {
-        //Si la variable page existe donc dans l'url on a mis ?page=truc alors $page devient ?page
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
-        } else $page = "home";
+    //if (isset($_SESSION['username']) || (isset($_GET['page']) && $_GET['page'] == 'register')) {
+    //Si la variable page existe donc dans l'url on a mis ?page=truc alors $page devient ?page
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else $page = "home";
 
-        //Si page est dans le tableau des routes alors $route devient la route (homeController)
-        if (isset($routes[$page])) {
-            $route = $routes[$page];
-        } else {
-            $route = $routes["home"];
-        }
+    //Si page est dans le tableau des routes alors $route devient la route (homeController)
+    if (isset($routes[$page])) {
+        $route = $routes[$page];
+    } else {
+        $route = $routes["home"];
+    }
 
-        if ($db == null) {
-            $route = $routes["dbError"];
-        }
+    if ($db == null) {
+        $route = $routes["dbError"];
+    }
 
-        //$controller devient HomeController (nom du fichier)
-        $controller = ucfirst($route);
+    //$controller devient HomeController (nom du fichier)
+    $controller = ucfirst($route);
 
-        //Require le fichier controller HomeController.php
-        require_once 'controller/' . $controller . '.php';
-        return $controller;
+    //Require le fichier controller HomeController.php
+    require_once 'controller/' . $controller . '.php';
+    return $controller;
+    /*
     } else {
         $route = $routes['login'];
 
@@ -36,5 +37,5 @@ function initRouter($routes, $db)
 
         require_once 'controller/' . $controller . '.php';
         return $controller;
-    }
+    }*/
 }

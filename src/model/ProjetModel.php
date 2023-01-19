@@ -318,4 +318,15 @@ function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
         'email' => $Email, 
         'IDPersonne' => $IDPersonne,
     ]);
-    }
+}
+
+function testOneUser($db, $email, $password) {
+    $query = $db->prepare("SELECT Nom, Prenom, IDPersonne WHERE :Email=Email AND :Password = Password");
+    $query ->execute([
+        'Email'=> $email,
+        'Password' => $password
+    ]);
+    $product = $query->fetch();
+
+    return $product;
+}

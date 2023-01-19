@@ -8,6 +8,18 @@ function addPersonne($db, $nom, $prenom)
         'Prenom' => $prenom
     ]);
 }
+
+function addPersonneComplet($db, $nom, $prenom, $email, $password)
+{
+    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser) VALUES (:Nom, :Prenom, :Email, :PasswordUser)");
+    return $query->execute([
+        'Nom' => $nom,
+        'Prenom' => $prenom,
+        'Email' => $email,
+        'PasswordUser' => $password
+    ]);
+}
+
 function addEntreprise ($db, $nom){
     $query = $db->prepare("INSERT INTO Entreprise_Cliente (Nom) VALUES (:nom)");
     return $query ->execute([
@@ -329,4 +341,17 @@ function testOneUser($db, $email, $password) {
     $user = $query->fetch();
 
     return $user;
+}
+
+
+
+function testEmailExists($db, $email) {
+    $query = $db->prepare("SELECT Nom FROM Personne WHERE :Email = Email");
+    $query ->execute([
+        'Email'=> $email,
+    ]);
+    $user = $query->fetch();
+
+    if ($user == null) return false;
+    else return true;
 }

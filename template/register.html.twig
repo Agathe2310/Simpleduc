@@ -8,25 +8,50 @@
   <div class="card bg-grey mx-auto" style="width: 50%;">
     <div class="m-5 ">
       <h1>Register</h1>
-      <form action="?page=register">
+
+      {% if erreur == "existe deja" %}
+      <p style="color: red;">Cette adresse mail existe déjà !</p>
+      {% endif %}
+
+      {% if erreur == "remplir champs" %}
+      <p style="color: red;">Veuillez remplir tous les champs !</p>
+      {% endif %}
+
+      {% if erreur == "compte cree" %}
+      <p style="color: green;">Compte créé !</p>
+      {% endif %}
+
+      <form action="?page=register" method="POST">
         <br>
 
         <p>
-          <label for="username">Username :</label>
-          <input type="text" name="username" placeholder="Username">
+          <label for="registerEmail">Email :</label>
+          <input type="email" name="registerEmail" placeholder="Email">
         </p>
 
         <p>
-          <label for="password">Password :</label>
-          <input type="password" name="password" placeholder="Password">
+          <label for="registerNom">Nom :</label>
+          <input type="text" name="registerNom" placeholder="Nom">
         </p>
 
+        <p>
+          <label for="registerPrenom">Prénom :</label>
+          <input type="text" name="registerPrenom" placeholder="Prénom">
+        </p>
+
+        <p>
+          <label for="registerPassword">Password :</label>
+          <input type="password" name="registerPassword" placeholder="Password">
+        </p>
+
+        {#
         <p>
           <label for="password">Confirm Password :</label>
           <input type="password2" name="password2" placeholder="Confirm Password">
         </p>
-        
-        <input type="submit" value="Register" class="btn btn-primary">
+        #}
+
+        <input type="submit" name="registerBtn" class="btn btn-primary">
       </form>
       <a href="?page=login">Login</a>
     </div>

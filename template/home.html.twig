@@ -7,5 +7,8 @@
     <p class="text-primary card">
         ReCoucou
     </p>
-    </div>
+    {% if session.login is defined %}
+    <p>Connecté en tant que {{session.login}}</p>
+    {% endif %}
+</div>
 {% endblock %}

@@ -8,6 +8,14 @@
   <div class="card bg-grey mx-auto" style="width: 30%;">
     <div class="m-5 ">
       <h1>Login</h1>
+
+      {% if user == "faux" %}
+      <p style="color: red;">Mauvais email ou mot de passe</p>
+      {% else %}
+      {% if user == 'connecte' %}
+      <p style="color: green;">Connecté !</p>
+      {% endif %}
+      {% endif %}
       <form action="?page=login" method="post">
         <br>
 

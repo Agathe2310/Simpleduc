@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Messagerie</h1>
+  <div class="card p-5">
+  <h2>Vos Messages :</h2>
+    {% for message in messages %}
+      <div class="card p-2" style="display: grid; grid-template-columns:1fr 1fr 1fr;">
+        <p >Message de : {{message.Emetteur}}</p>
+        <p>Objet : {{message.Objet}}</p>
+        <p>Date : {{message.Date}}</p>
+      </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

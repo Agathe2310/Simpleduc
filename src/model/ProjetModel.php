@@ -21,17 +21,19 @@ function addPersonneComplet($db, $nom, $prenom, $email, $password)
     ]);
 }
 
-function addEntreprise ($db, $nom){
+function addEntreprise($db, $nom)
+{
     $query = $db->prepare("INSERT INTO Entreprise_Cliente (Nom) VALUES (:nom)");
-    return $query ->execute([
+    return $query->execute([
         'nom' => $nom
     ]);
 }
 
-function addContrat ($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre){
-    $query = $db -> prepare("INSERT INTO Contrat (DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre)
+function addContrat($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre)
+{
+    $query = $db->prepare("INSERT INTO Contrat (DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre)
                             VALUES (:datesignature, :coutglobal, :datedebut, :datefin, :idpersonne, :identre)");
-    return $query ->execute([
+    return $query->execute([
         'datesignature' => $DateSignature,
         'coutglobal' => $CoutGlobal,
         'datedebut' => $DateDebut,
@@ -50,7 +52,8 @@ function getAllContrat($db)
     return $allContrat;
 }
 
-function getOneContrat($db, $IDContrat){
+function getOneContrat($db, $IDContrat)
+{
     $query = $db->prepare("SELECT DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre 
                             FROM Contrat
                             WHERE IDContrat = :IDContrat ");
@@ -61,7 +64,7 @@ function getOneContrat($db, $IDContrat){
     return $oneContrat;
 }
 
-function modifierContrat($db, $IDContrat, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre) 
+function modifierContrat($db, $IDContrat, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre)
 {
     $query = $db->prepare("UPDATE Contrat
                             SET DateSignature = :DateSignature, CoutGlobal = :CoutGlobal, DateDebut = :DateDebut, DateFin = :DateFin, IDPersonne = :IDPersonne, IDEntre = :IDEntre
@@ -95,7 +98,8 @@ function getAllEntreprise($db)
     return $allEntreprise;
 }
 
-function getOneEntreprise($db, $IDEntre){
+function getOneEntreprise($db, $IDEntre)
+{
     $query = $db->prepare("SELECT Nom FROM Entreprise_Cliente
                             WHERE IDEntre = :IDEntre ");
     $query->execute([
@@ -114,7 +118,8 @@ function supprimerEntreprise($db, $IDEntre)
     ]);
 }
 
-function modifierEntreprise($db, $IDEntreAncien, $IDEntreNouveau, $NomEntreNouveau){
+function modifierEntreprise($db, $IDEntreAncien, $IDEntreNouveau, $NomEntreNouveau)
+{
     $query = $db->prepare("UPDATE Entreprise_Cliente
                             SET IDEntre = :IDEntreNouveau, `Nom` = :NomEntreNouveau
                             WHERE IDEntre = :IDEntreAncien ");
@@ -163,7 +168,7 @@ function getModule($db, $id)
 
     $product = $query->fetch();
 
-    if ($product != null ) return $product;
+    if ($product != null) return $product;
     else return "Ce module n'existe pas !";
 }
 
@@ -199,9 +204,10 @@ function getAllContrats($db)
     return $product;
 }
 
-function getPersonne($db, $IDPersonne){
+function getPersonne($db, $IDPersonne)
+{
     $query = $db->prepare("SELECT Nom, Prenom FROM Personne WHERE :IDPersonne = IDPersonne");
-    $query ->execute([
+    $query->execute([
         'IDPersonne' => $IDPersonne,
     ]);
     $product = $query->fetch();
@@ -209,29 +215,32 @@ function getPersonne($db, $IDPersonne){
     return $product;
 }
 
-function updatePersonne($db, $nom, $prenom, $IDPersonne){
-    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne "); 
+function updatePersonne($db, $nom, $prenom, $IDPersonne)
+{
+    $query = $db->prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne ");
     return $query->execute([
         'Nom' => $nom,
         'Prenom' => $prenom,
         'IDPersonne' => $IDPersonne
     ]);
-    }
+}
 
-function listePersonnes($db){
-    $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
-    $query -> execute([]);
+function listePersonnes($db)
+{
+    $query = $db->prepare("SELECT IDPersonne, Nom, Prenom FROM Personne");
+    $query->execute([]);
     $liste = $query->fetchAll();
     return $liste;
 }
 
 
-function deletePersonne($db, $IDPersonne){
-    $query = $db -> prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne "); 
+function deletePersonne($db, $IDPersonne)
+{
+    $query = $db->prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne ");
     return $query->execute([
         'IDPersonne' => $IDPersonne
     ]);
-    }
+}
 
 
 
@@ -247,7 +256,8 @@ function addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module)
     ]);
 }
 
-function getAllTaches($db) {
+function getAllTaches($db)
+{
     $query = $db->prepare("SELECT IDTache, Libelle, Etat, DateDebut, DateFin, IDModule FROM Tache");
     $query->execute([]);
 
@@ -266,19 +276,20 @@ function addCoPersonne($db, $Rue, $Ville, $CodePostal, $Email, $IDPersonne)
         'Code_Postal' => $CodePostal,
         'email' => $Email,
     ]);
-    }
+}
 
-function getAllCo($db){
+function getAllCo($db)
+{
     $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = Personne.IDPersonne");
-    $query ->execute([
-    ]);
+    $query->execute([]);
     $product = $query->fetchAll();
 
     return $product;
 }
 
 
-function suppTache($db, $tache) {
+function suppTache($db, $tache)
+{
     $query = $db->prepare("DELETE FROM Tache
                             WHERE IDTache = :IDTache ");
     $query->execute([
@@ -295,7 +306,7 @@ function getTache($db, $id)
 
     $product = $query->fetch();
 
-    if ($product != null ) return $product;
+    if ($product != null) return $product;
     else return "Cette tache n'existe pas !";
 }
 
@@ -312,32 +323,36 @@ function updateTache($db, $id, $libelle, $etat, $dateDebut, $dateFin, $module)
     ]);
 }
 
-function getCo($db, $IDPersonne){
+function getCo($db, $IDPersonne)
+{
     $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = :IDPersonne AND Personne.IDPersonne");
-    $query ->execute([
-        'IDPersonne'=> $IDPersonne, ]);
+    $query->execute([
+        'IDPersonne' => $IDPersonne,
+    ]);
     $product = $query->fetch();
 
     return $product;
 }
 
 
-function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
-    $query = $db -> prepare("UPDATE Coordonnees SET Rue = :Rue, Code_Postal = :CodePostal, Ville = :Ville, email = :email WHERE IDPersonne = :IDPersonne "); 
+function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne)
+{
+    $query = $db->prepare("UPDATE Coordonnees SET Rue = :Rue, Code_Postal = :CodePostal, Ville = :Ville, email = :email WHERE IDPersonne = :IDPersonne ");
     return $query->execute([
         'Rue' => $Rue,
         'CodePostal' => $CodePostal,
         'Ville' => $Ville,
-        'email' => $Email, 
+        'email' => $Email,
         'IDPersonne' => $IDPersonne,
     ]);
 }
 
 
-function getOneUser($db, $email) {
+function getOneUser($db, $email)
+{
     $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :Email = Email");
-    $query ->execute([
-        'Email'=> $email
+    $query->execute([
+        'Email' => $email
     ]);
     $user = $query->fetch();
 
@@ -345,10 +360,11 @@ function getOneUser($db, $email) {
 }
 
 
-function getOneUserFromID($db, $id) {
+function getOneUserFromID($db, $id)
+{
     $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :id = IDPersonne");
-    $query ->execute([
-        'id'=> $id
+    $query->execute([
+        'id' => $id
     ]);
     $user = $query->fetch();
 
@@ -356,10 +372,11 @@ function getOneUserFromID($db, $id) {
 }
 
 
-function getOneRole($db, $id) {
+function getOneRole($db, $id)
+{
     $query = $db->prepare("SELECT idRole, Label FROM `Role` WHERE :id = idRole");
-    $query ->execute([
-        'id'=> $id
+    $query->execute([
+        'id' => $id
     ]);
     $user = $query->fetch();
 
@@ -369,13 +386,16 @@ function getOneRole($db, $id) {
 
 
 
-function testEmailExists($db, $email) {
+function testEmailExists($db, $email)
+{
     $query = $db->prepare("SELECT Nom FROM Personne WHERE :Email = Email");
-    $query ->execute([
-        'Email'=> $email,
+    $query->execute([
+        'Email' => $email,
     ]);
     $user = $query->fetch();
 
     if ($user == null) return false;
     else return true;
 }
+
+

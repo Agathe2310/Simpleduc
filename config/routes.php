@@ -22,5 +22,6 @@ $routes = [
     'login' => 'loginController:0',
     'register' => 'registerController:0',
     'deconnexion' => 'deconnexionController:0',
-    'confirmRegister' => 'confirmRegisterController:0'
+    'confirmRegister' => 'confirmRegisterController:0',
+    'messagerie' => 'messagerieController:1',
 ];

@@ -1,5 +1,5 @@
 <?php
-function listePersonnesController($twig, $db){
+function listePersonnesController($twig, $db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';
    
     
@@ -17,7 +17,8 @@ function listePersonnesController($twig, $db){
     echo $twig->render('listePersonnes.html.twig', ["liste"=> listePersonnes($db),]);
 
     if (isset($_POST['btnModifPersonne'])) {
-        echo $twig->render('modifPersonne.html.twig', []);
+        echo $twig->render('modifPersonne.html.twig', [
+        'nbNotifs' => $nbNotifs]);
 }
 
 }

@@ -2,7 +2,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-function registerController($twig, $db)
+function registerController($twig, $db, $nbNotifs)
 {
 
     include_once '../src/model/ProjetModel.php';

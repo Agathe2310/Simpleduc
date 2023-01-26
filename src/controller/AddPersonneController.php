@@ -1,5 +1,5 @@
 <?php
-function addPersonneController($twig, $db) {
+function addPersonneController($twig, $db, $nbNotifs) {
     include_once '../src/model/ProjetModel.php';
     
 
@@ -11,5 +11,6 @@ function addPersonneController($twig, $db) {
 
     }
 
-    echo $twig->render('addPersonne.html.twig', []);
+    echo $twig->render('addPersonne.html.twig', [
+    'nbNotifs' => $nbNotifs]);
 }

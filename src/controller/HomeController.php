@@ -1,6 +1,6 @@
 <?php
 
-function homeController($twig, $db)
+function homeController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
@@ -12,6 +12,7 @@ function homeController($twig, $db)
 
     echo $twig->render('home.html.twig', [
         'role' => $role,
-        'date' =>  date('Y-m-d H:i:s')
+        'date' =>  date('Y-m-d H:i:s'),
+        'nbNotifs' => $nbNotifs
     ]);
 }

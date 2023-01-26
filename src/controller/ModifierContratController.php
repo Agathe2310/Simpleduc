@@ -21,7 +21,8 @@ function modifierContratController($twig,$db){
         $Contrat = getOneContrat($db, $id);
         echo $twig -> render("modifierContrat.html.twig", [
             'Contrat' => $Contrat,
-            'IDContrat' => $id
+            'IDContrat' => $id,
+            'nbNotifs' => $nbNotifs
         ]);
     }
 

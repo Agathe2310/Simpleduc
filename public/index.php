@@ -7,6 +7,8 @@ require_once '../src/router.php';
 require_once '../src/twig.php';
 require_once '../src/database.php';
 require_once '../src/model/MailModel.php';
+include_once '../src/model/MessagerieModel.php';  ##on inclut pour apres
+
 
 session_start();
 
@@ -24,5 +26,8 @@ $db = getConnection($config);
 
 $twig = initTwig('../template/');
 
+$nbNotifs = 0;
+if (isset($_SESSION['idUser'])) $nbNotifs = count(getMessagesNonLu($db, $_SESSION['idUser']));
+
 $actionController = initRouter($routes, $db);
-$actionController($twig, $db);
+$actionController($twig, $db, $nbNotifs);

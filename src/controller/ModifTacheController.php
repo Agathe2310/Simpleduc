@@ -1,6 +1,6 @@
 <?php
 
-function modifTacheController($twig, $db)
+function modifTacheController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';
     
@@ -24,5 +24,6 @@ function modifTacheController($twig, $db)
     echo $twig->render('modifTache.html.twig', [
         "tache" => getTache($db, $id),
         "modules" => getAllModules($db),
+        'nbNotifs' => $nbNotifs
     ]);
 }

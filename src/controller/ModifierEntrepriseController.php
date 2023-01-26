@@ -21,7 +21,8 @@ function modifierEntrepriseController($twig,$db){
         $nomEntreprise = getOneEntreprise($db,$id);
         echo $twig -> render("modifierEntreprise.html.twig", [
             'IDEntreprise' => $id,
-            'NomEntreprise' => $nomEntreprise
+            'NomEntreprise' => $nomEntreprise,
+            'nbNotifs' => $nbNotifs
         ]);
     }
     else {

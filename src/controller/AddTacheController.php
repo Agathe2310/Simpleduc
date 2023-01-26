@@ -1,6 +1,6 @@
 <?php
 
-function addTacheController($twig, $db)
+function addTacheController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
@@ -34,6 +34,7 @@ function addTacheController($twig, $db)
 
     echo $twig->render("addTache.html.twig", [
         "taches" => getAllTaches($db),
-        "modules" => getAllModules($db)
+        "modules" => getAllModules($db),
+        'nbNotifs' => $nbNotifs
     ]);
 }

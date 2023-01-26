@@ -1,6 +1,6 @@
 <?php
 
-function modifModuleController($twig, $db)
+function modifModuleController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';
 
@@ -22,6 +22,7 @@ function modifModuleController($twig, $db)
     echo $twig->render('modifModule.html.twig', [
         "module" => getModule($db, $id),
         "equipes" => getAllEquipes($db),
-        "contrats" => getAllContrats($db)
+        "contrats" => getAllContrats($db),
+        'nbNotifs' => $nbNotifs
     ]);
 }

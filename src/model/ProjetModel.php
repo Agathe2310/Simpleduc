@@ -247,7 +247,7 @@ function deletePersonne($db, $IDPersonne)
 function addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module)
 {
     $query = $db->prepare("INSERT INTO Tache (Libelle, Etat, DateDebut, DateFin, IDModule) VALUES (:Libelle, :Etat, :DateDebut, :DateFin, :IDModule)");
-    return $query->execute([
+    $query->execute([
         'Libelle' => $libelle,
         'Etat' => $etat,
         'DateDebut' => $dateDebut,

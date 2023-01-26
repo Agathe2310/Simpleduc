@@ -11,14 +11,31 @@ function listePersonnesController($twig, $db){
             }
         }
     }
-
+    $liste = listePersonnes($db);
+    $listeDev = array();
+    $listeContact = array();
+    foreach ($liste as $i){
+        $var1 = isDev($db, $i[0]);
+        #var_dump( $var);
+        if ($var1 !== false){
+            array_push($listeDev, $i);
+        }
+        $var2 = isContact($db, $i[0]);
+        if ($var2 !== false){
+            if ($var1 == false){
+                array_push($listeContact, $i);
+            }
+        }
         
+    }
 
-    echo $twig->render('listePersonnes.html.twig', ["liste"=> listePersonnes($db),]);
+    
 
     if (isset($_POST['btnModifPersonne'])) {
         echo $twig->render('modifPersonne.html.twig', []);
 }
+    echo $twig->render('listePersonnes.html.twig', ["liste"=> $liste, "listeDev"=>$listeDev, "listeContact"=>$listeContact]);
+
 
 }
 ?>

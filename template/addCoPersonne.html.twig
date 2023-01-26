@@ -28,9 +28,10 @@
 			</label>
             <input type="text" value="" name="Ville" id="Ville"/>
 
-            <label for="nom" class="form-label">
+      <label for="nom" class="form-label">
 				Email
-			</label><input type="text" value="" name="Email" id="Email"/>
+			</label>
+      <input type="text" value="{{personne.Email}}" name="Email" id="Email"/>
 
             <button type="submit" class="btn btn-dark" name="btnAddCoPersonne" value="{{personne.IDPersonne}}">
                 Ajouter </button>
@@ -38,5 +39,7 @@
         
       </div>
   </div>
+</div>
+</div>
 </div>
 {% endblock %}

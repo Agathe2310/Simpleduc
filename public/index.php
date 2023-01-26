@@ -17,9 +17,6 @@ if (isset($_SESSION['deconnexion'])) {
 }
 
 
-var_dump("Session :");
-var_dump($_SESSION);
-
 $db = getConnection($config);
 
 $twig = initTwig('../template/');

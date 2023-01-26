@@ -1,23 +1,78 @@
 <?php
 
-function addPersonne($db, $nom, $prenom)
+function addDev($db, $nom, $prenom, $email, $password)
 {
-    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom) VALUES (:Nom, :Prenom)");
-    return $query->execute([
+    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser, idRole, CompteVerifie) VALUES (:Nom, :Prenom, :Email, :PasswordUser, :idRole, :CompteVerifie);");
+    $query2 = $db ->prepare("INSERT INTO Dev(IDPersonne, IDIndice) VALUES((SELECT IDPersonne FROM Personne WHERE Email = :Email), :IDIndice);");
+    $query3 = $db -> prepare("INSERT INTO regrouper(IDPersonne, IDEquipe) VALUES((SELECT IDPersonne FROM Personne WHERE Email = :Email), :IDEquipe);");
+    $query->execute([
         'Nom' => $nom,
-        'Prenom' => $prenom
+        'Prenom' => $prenom,
+        'Email' => $email,
+        'PasswordUser' => $password,
+        'idRole' => 1,
+        'CompteVerifie' => 1,
+    ]);
+    $query2->execute([
+        'Email' => $email,
+        'IDIndice' => 1
+    
+    ]);
+    return $query3->execute([
+        'Email' => $email,
+        'IDEquipe' => 0
+    
+    ]);
+}
+
+
+function transformerenDev($db, $IDPersonne, $email)
+{
+    $query = $db ->prepare("INSERT INTO Dev(IDPersonne, IDIndice) VALUES(:IDPersonne, :IDIndice);");
+    $query2 = $db -> prepare("INSERT INTO regrouper(IDPersonne, IDEquipe) VALUES((SELECT IDPersonne FROM Personne WHERE Email = :Email), :IDEquipe);");
+    $query->execute([
+        'IDPersonne' => $IDPersonne,
+        'IDIndice' => 1
+    
+    ]);
+    return $query2->execute([
+        'Email' => $email,
+        'IDEquipe' => 0,
+    
+    ]);
+}
+
+function addClient($db, $nom, $prenom, $email, $password)
+{
+    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser, idRole, CompteVerifie) VALUES (:Nom, :Prenom, :Email, :PasswordUser, :idRole, :CompteVerifie);");
+    $query2 = $db->prepare("INSERT INTO Contact(IDPersonne) VALUES((SELECT IDPersonne FROM Personne WHERE Email = :Email));");
+    $query->execute([
+        'Nom' => $nom,
+        'Prenom' => $prenom,
+        'Email' => $email,
+        'PasswordUser' => $password,
+        'idRole' => 1,
+        'CompteVerifie' => 1,
+    ]);
+    return $query2->execute([
+        'Email' => $email,
+    
     ]);
 }
 
 function addPersonneComplet($db, $nom, $prenom, $email, $password)
 {
     $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser, idRole) VALUES (:Nom, :Prenom, :Email, :PasswordUser, :idRole)");
-    return $query->execute([
+    $query2 = $db->prepare("INSERT INTO Contact(IDPersonne) VALUES((SELECT IDPersonne FROM Personne WHERE Email = :Email));");
+    $query->execute([
         'Nom' => $nom,
         'Prenom' => $prenom,
         'Email' => $email,
         'PasswordUser' => $password,
         'idRole' => 1
+    ]);
+    return $query2->execute([
+        'Email' =>$email
     ]);
 }
 
@@ -27,6 +82,7 @@ function addEntreprise ($db, $nom){
         'nom' => $nom
     ]);
 }
+
 
 function addContrat ($db, $DateSignature, $CoutGlobal, $DateDebut, $DateFin, $IDPersonne, $IDEntre){
     $query = $db -> prepare("INSERT INTO Contrat (DateSignature, CoutGlobal, DateDebut, DateFin, IDPersonne, IDEntre)
@@ -193,14 +249,14 @@ function getAllContrats($db)
 {
     $query = $db->prepare("SELECT IDContrat, IDEntre FROM Contrat");
     $query->execute([]);
-
+    
     $product = $query->fetchAll();
-
+    
     return $product;
 }
 
 function getPersonne($db, $IDPersonne){
-    $query = $db->prepare("SELECT Nom, Prenom FROM Personne WHERE :IDPersonne = IDPersonne");
+    $query = $db->prepare("SELECT Nom, Prenom, Email FROM Personne WHERE :IDPersonne = IDPersonne");
     $query ->execute([
         'IDPersonne' => $IDPersonne,
     ]);
@@ -216,7 +272,15 @@ function updatePersonne($db, $nom, $prenom, $IDPersonne){
         'Prenom' => $prenom,
         'IDPersonne' => $IDPersonne
     ]);
-    }
+}
+function updateDev($db, $nom, $prenom, $IDPersonne){
+    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne; UPDATE "); 
+    return $query->execute([
+        'Nom' => $nom,
+        'Prenom' => $prenom,
+        'IDPersonne' => $IDPersonne
+    ]);
+}
 
 function listePersonnes($db){
     $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
@@ -233,8 +297,8 @@ function deletePersonne($db, $IDPersonne){
     ]);
     }
 
-
-
+    
+    
 function addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module)
 {
     $query = $db->prepare("INSERT INTO Tache (Libelle, Etat, DateDebut, DateFin, IDModule) VALUES (:Libelle, :Etat, :DateDebut, :DateFin, :IDModule)");
@@ -355,6 +419,24 @@ function getOneUserFromID($db, $id) {
     return $user;
 }
 
+function isDev($db, $IDPersonne){
+    $query = $db->prepare("SELECT IdIndice FROM Dev WHERE IDPersonne = :IDPersonne ;");
+    $query ->execute([
+        'IDPersonne'=> $IDPersonne
+    ]);
+    $user = $query->fetch();
+
+    return $user;   
+}
+function isContact($db, $IDPersonne){
+    $query = $db->prepare("SELECT IDPersonne FROM Contact WHERE IDPersonne = :IDPersonne ;");
+    $query ->execute([
+        'IDPersonne'=> $IDPersonne
+    ]);
+    $user = $query->fetch();
+
+    return $user;   
+}
 
 function getOneRole($db, $id) {
     $query = $db->prepare("SELECT idRole, Label FROM `Role` WHERE :id = idRole");

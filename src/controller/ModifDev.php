@@ -5,8 +5,6 @@ function ModifPersonneController($twig, $db){
     if (isset($_GET["id"])) {
         $IDPersonne = $_GET["id"];
     }
-    $email = getPersonne($db, $IDPersonne);
-    
     if (isset($_POST['btnModifierPersonne'])) {
         updatePersonne(
             $db,
@@ -15,16 +13,10 @@ function ModifPersonneController($twig, $db){
             $IDPersonne,
         );
     }
-    if (isset($_POST['btnDev'])) {
-        transformerenDev(
-            $db,
-            $IDPersonne,
-            $email[2]
-        );
-    }
+    
     
     echo $twig->render('modifPersonne.html.twig', [
-        "personne" => $email,
+        "personne" => getPersonne($db, $IDPersonne),
    ]);
 }
 

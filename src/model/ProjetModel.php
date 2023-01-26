@@ -15,7 +15,7 @@ function addDev($db, $nom, $prenom, $email, $password)
     ]);
     $query2->execute([
         'Email' => $email,
-        'IDIndice' => 1
+        'IDIndice' => 1,
     
     ]);
     return $query3->execute([
@@ -265,16 +265,21 @@ function getPersonne($db, $IDPersonne){
     return $product;
 }
 
-function updatePersonne($db, $nom, $prenom, $IDPersonne){
-    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne "); 
+function updateDev($db, $nom, $prenom, $IDEquipe, $IDPersonne){
+    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne; "); 
+    $query2 = $db->prepare("UPDATE regrouper SET IDEquipe = :IDEquipe WHERE IDPersonne = :IDPersonne");
+    $query2->execute([
+        'IDEquipe' => $IDEquipe,
+        'IDPersonne' => $IDPersonne
+    ]);
     return $query->execute([
         'Nom' => $nom,
         'Prenom' => $prenom,
         'IDPersonne' => $IDPersonne
     ]);
 }
-function updateDev($db, $nom, $prenom, $IDPersonne){
-    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne; UPDATE "); 
+function updatePersonne($db, $nom, $prenom, $IDPersonne){
+    $query = $db -> prepare("UPDATE Personne SET Nom = :Nom, Prenom = :Prenom WHERE IDPersonne = :IDPersonne; "); 
     return $query->execute([
         'Nom' => $nom,
         'Prenom' => $prenom,
@@ -282,6 +287,14 @@ function updateDev($db, $nom, $prenom, $IDPersonne){
     ]);
 }
 
+function getEquipe($db, $IDPersonne){
+    $query = $db -> prepare("SELECT IDEquipe FROM regrouper WHERE IDPersonne = :IDPersonne "); 
+    $query->execute([
+        "IDPersonne" => $IDPersonne
+    ]);
+    $product = $query->fetch();
+    return $product;
+}
 function listePersonnes($db){
     $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
     $query -> execute([]);
@@ -295,8 +308,22 @@ function deletePersonne($db, $IDPersonne){
     return $query->execute([
         'IDPersonne' => $IDPersonne
     ]);
+}
+function deleteDev($db, $IDPersonne){
+    $query = $db -> prepare("DELETE FROM regrouper WHERE IDPersonne = :IDPersonne");
+    $query2 = $db -> prepare("DELETE FROM Equipe WHERE IDPersonne = :IDPersonne");
+    $query3 = $db -> prepare("DELETE FROM Dev WHERE IDPersonne = :IDPersonne");
+    $query4 = $db -> prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne"); 
+    $query->execute([
+        'IDPersonne' => $IDPersonne]);
+    $query2->execute([
+            'IDPersonne' => $IDPersonne]);
+    $query3->execute([
+                'IDPersonne' => $IDPersonne]);
+    return $query4->execute([
+        'IDPersonne' => $IDPersonne
+    ]);
     }
-
     
     
 function addTache($db, $libelle, $etat, $dateDebut, $dateFin, $module)

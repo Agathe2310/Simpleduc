@@ -8,6 +8,19 @@ function addPersonne($db, $nom, $prenom)
         'Prenom' => $prenom
     ]);
 }
+
+function addPersonneComplet($db, $nom, $prenom, $email, $password)
+{
+    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser, idRole) VALUES (:Nom, :Prenom, :Email, :PasswordUser, :idRole)");
+    return $query->execute([
+        'Nom' => $nom,
+        'Prenom' => $prenom,
+        'Email' => $email,
+        'PasswordUser' => $password,
+        'idRole' => 1
+    ]);
+}
+
 function addEntreprise ($db, $nom){
     $query = $db->prepare("INSERT INTO Entreprise_Cliente (Nom) VALUES (:nom)");
     return $query ->execute([
@@ -318,4 +331,51 @@ function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
         'email' => $Email, 
         'IDPersonne' => $IDPersonne,
     ]);
-    }
+}
+
+
+function getOneUser($db, $email) {
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :Email = Email");
+    $query ->execute([
+        'Email'=> $email
+    ]);
+    $user = $query->fetch();
+
+    return $user;
+}
+
+
+function getOneUserFromID($db, $id) {
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :id = IDPersonne");
+    $query ->execute([
+        'id'=> $id
+    ]);
+    $user = $query->fetch();
+
+    return $user;
+}
+
+
+function getOneRole($db, $id) {
+    $query = $db->prepare("SELECT idRole, Label FROM `Role` WHERE :id = idRole");
+    $query ->execute([
+        'id'=> $id
+    ]);
+    $user = $query->fetch();
+
+    return $user;
+}
+
+
+
+
+function testEmailExists($db, $email) {
+    $query = $db->prepare("SELECT Nom FROM Personne WHERE :Email = Email");
+    $query ->execute([
+        'Email'=> $email,
+    ]);
+    $user = $query->fetch();
+
+    if ($user == null) return false;
+    else return true;
+}

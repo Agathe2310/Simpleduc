@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Modifier Mot de Passe{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <a href="index.php?page=home" style="text-decoration: none;">Retour</a>
+
+  <h1>Modification du mot de passe :</h1>
+  {% if message == "Mot de passe mis à jour" %}
+    <p class="alert alert-success"> {{ message }} </p>
+  {% elseif message == "Erreur lors de la mis à jour du mot de passe" %}
+    <p class="alert alert-danger"> {{ message }} </p>
+  {% endif %}
+    <form method="post">
+        <input type="password" placeholder="Ancien Mot de Passe" name="AncienMdp"/>
+        <input type="password" placeholder="Nouveau Mot de Passe" name="NouveauMdp"/>
+        <input type="submit" class="btn btn-dark" name="btnModMdp">
+    </form>
+</div>
+{% endblock %}

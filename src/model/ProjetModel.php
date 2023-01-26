@@ -334,7 +334,7 @@ function updateCoPersonne($db, $Rue, $CodePostal, $Ville, $Email, $IDPersonne){
 
 
 function getOneUser($db, $email) {
-    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie FROM Personne WHERE :Email = Email");
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :Email = Email");
     $query ->execute([
         'Email'=> $email
     ]);
@@ -342,6 +342,19 @@ function getOneUser($db, $email) {
 
     return $user;
 }
+
+
+function getOneRole($db, $id) {
+    $query = $db->prepare("SELECT idRole, Label FROM `Role` WHERE :id = idRole");
+    $query ->execute([
+        'id'=> $id
+    ]);
+    $user = $query->fetch();
+
+    return $user;
+}
+
+
 
 
 function testEmailExists($db, $email) {

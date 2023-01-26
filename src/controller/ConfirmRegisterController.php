@@ -15,7 +15,7 @@ function confirmRegisterController($twig, $db)
         if ($confCompte == false) {
             $message = "Identifiant éroné";
         } else {
-            if (true) {
+            if (verifyDateConfirmation($confCompte['dateConf'])) {
                 confirmerCompte($db, $confCompte['IDPersonne']);
                 $message = "Votre compte a été vérifié !";
             }

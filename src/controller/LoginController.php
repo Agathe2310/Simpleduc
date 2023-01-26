@@ -26,6 +26,7 @@ function loginController($twig, $db)
                 if (password_verify($password, $user['PasswordUser'])) {
                     if ($user['CompteVerifie'] == 1) {
                         $_SESSION['login'] = $email;
+                        $_SESSION['role'] = $user['idRole'];
                         $user = "connecte";
                         header("Location: index.php");
                     } else $user = "pas verifie";

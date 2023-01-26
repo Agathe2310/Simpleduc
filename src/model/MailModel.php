@@ -40,7 +40,7 @@ class Mail
 
 function getConfirmationCompte($db, $IDConf)
 {
-    $query = $db->prepare("SELECT IDPersonne FROM ConfirmationCompte WHERE IDConfirmation = :IDConf");
+    $query = $db->prepare("SELECT IDPersonne, dateConf FROM ConfirmationCompte WHERE IDConfirmation = :IDConf");
     $query->execute([
         'IDConf' => $IDConf
     ]);
@@ -86,7 +86,15 @@ function confirmerCompte($db, $id)
     ]);
 }
 
-function getDateBySQL() {
+function verifyDateConfirmation($dateConf)
+{
+    var_dump(date('Y-m-d H:i:s'));
+    $now =  date('Y-m-d H:i:s');
+    var_dump($dateConf);
+}
+
+function getDateBySQL()
+{
     $date = getdate();
-    return strval($date['year']).strval($date['month']).strval($date['day']);
+    return strval($date['year']) . strval($date['month']) . strval($date['day']);
 }

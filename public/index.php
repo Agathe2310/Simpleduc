@@ -6,8 +6,10 @@ require_once '../config/config.php';
 require_once '../src/router.php';
 require_once '../src/twig.php';
 require_once '../src/database.php';
+require_once '../src/model/MailModel.php';
 
 session_start();
+
 
 if (isset($_SESSION['deconnexion'])) {
     session_destroy();

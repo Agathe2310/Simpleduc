@@ -11,12 +11,13 @@ function addPersonne($db, $nom, $prenom)
 
 function addPersonneComplet($db, $nom, $prenom, $email, $password)
 {
-    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser) VALUES (:Nom, :Prenom, :Email, :PasswordUser)");
+    $query = $db->prepare("INSERT INTO Personne (Nom, Prenom, Email, PasswordUser, idRole) VALUES (:Nom, :Prenom, :Email, :PasswordUser, :idRole)");
     return $query->execute([
         'Nom' => $nom,
         'Prenom' => $prenom,
         'Email' => $email,
-        'PasswordUser' => $password
+        'PasswordUser' => $password,
+        'idRole' => 1
     ]);
 }
 
@@ -337,6 +338,17 @@ function getOneUser($db, $email) {
     $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :Email = Email");
     $query ->execute([
         'Email'=> $email
+    ]);
+    $user = $query->fetch();
+
+    return $user;
+}
+
+
+function getOneUserFromID($db, $id) {
+    $query = $db->prepare("SELECT Nom, Prenom, PasswordUser, Email, IDPersonne, CompteVerifie, idRole FROM Personne WHERE :id = IDPersonne");
+    $query ->execute([
+        'id'=> $id
     ]);
     $user = $query->fetch();
 

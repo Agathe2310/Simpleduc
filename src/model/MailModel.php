@@ -86,15 +86,50 @@ function confirmerCompte($db, $id)
     ]);
 }
 
+function delConfirmation($db, $id) {
+    $query = $db->prepare("DELETE FROM ConfirmationCompte 
+                            WHERE IDPersonne = :IDPersonne ");
+    $query->execute([
+        'IDPersonne' => $id
+    ]);
+}
+
 function verifyDateConfirmation($dateConf)
 {
-    var_dump(date('Y-m-d H:i:s'));
-    $now =  date('Y-m-d H:i:s');
-    var_dump($dateConf);
+    $now = new DateTime(date('Y-m-d H:i:s'));
+    $dateConf = new DateTime(date($dateConf));
+    $now ->modify("-24 hours");
+
+    //Si apres avoir enlevé 24 heures, c'était il y a toujours plus de 24 heures, return false
+    if ($now > $dateConf) return false;
+    return true;
 }
 
 function getDateBySQL()
 {
     $date = getdate();
     return strval($date['year']) . strval($date['month']) . strval($date['day']);
+}
+
+function envoyerVerification($db, $twig, $idUser, $email) {
+    $mail2 = new Mail();
+
+                    //Création vérif
+                    $idRegister = addConfirmationCompte($db, $idUser);
+                    var_dump("ID REGISTER :");
+                    var_dump($idRegister);
+
+                    //Envoyer mail
+                    if ($idRegister != null) {
+                        $mail2->envoyerMailer(
+                            $email,
+                            "Confirmer le compte PHP",
+                            $twig->render("mail/register_message.html.twig", [
+                                'email' => $email,
+                                'idRegister' => $idRegister
+                            ]),
+                            null
+                        );
+                    }
+
 }

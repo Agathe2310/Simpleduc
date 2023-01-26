@@ -31,25 +31,8 @@ function registerController($twig, $db)
 
                     $idUser = getOneUser($db, $email)['IDPersonne'];
 
-                    $mail2 = new Mail();
-
-                    //Création vérif
-                    $idRegister = addConfirmationCompte($db, $idUser);
-                    var_dump("ID REGISTER :");
-                    var_dump($idRegister);
-
-                    //Envoyer mail
-                    if ($idRegister != null) {
-                        $mail2->envoyerMailer(
-                            $email,
-                            "Confirmer le compte PHP",
-                            $twig->render("mail/register_message.html.twig", [
-                                'email' => $email,
-                                'idRegister' => $idRegister
-                            ]),
-                            null
-                        );
-                    }
+                    envoyerVerification($db, $twig, $idUser, $email);
+                    
                 } else $erreur = "existe deja";
             } else $erreur = "mdp trop court";
         } else $erreur = "remplir champs";

@@ -488,3 +488,12 @@ function testEmailExists($db, $email) {
     if ($user == null) return false;
     else return true;
 }
+
+function updateMdp($db, $email, $nouveaumdp)
+{
+$query = $db -> prepare("UPDATE Personne SET PasswordUser = :nouveaumdp WHERE Email = :email"); 
+    return $query->execute([
+        'email' => $email,
+        'nouveaumdp' => $nouveaumdp
+    ]);
+}

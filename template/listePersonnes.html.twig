@@ -3,11 +3,12 @@
 {% block title %}Liste des personnes !{% endblock %}
 
 {% block content %}
-  <h1>Liste des personnes</h1>
- 
-    {% for personne in liste %}
+<div class="container">
+
+  <h1>Liste des contacts</h1>
+  
+    {% for personne in listeContact %}
       <div>
-          <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}" />
             <p> Prénom: {{personne.Nom}}</p>
             <p> Nom: {{personne.Prenom}}</p>
             <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
@@ -17,8 +18,29 @@
           <form method='POST' action="index.php?page=listePersonnes">
           </form>
           {% endfor %}
+          <h1>Liste des développeurs</h1>
+          {% for dev in listeDev %}
+          <div>
+            <p> Prénom: {{dev.Nom}}</p>
+            <p> Nom: {{dev.Prenom}}</p>
+            <a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
+            <a class="link" href="?page=addCoPersonne&id={{dev.IDPersonne}}">Ajouter les coordonnees</a>
+          </div>
+          {% endfor %}
+          <h1>Supprimer des personnes</h1>
+          <hr>
+          {% for personne in liste %}
+          <form method='POST' action="index.php?page=listePersonnes">
+      <div>
+        <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}" />
+            <p> Prénom: {{personne.Nom}}</p> <p> Nom: {{personne.Prenom}}</p>
+            <hr>
+          </div>
+          {% endfor %}
           <button type="submit" class="btn btn-dark"  name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
-
-
-    
-{% endblock %}
+        </form>
+        
+        
+        
+      </div>
+        {% endblock %}

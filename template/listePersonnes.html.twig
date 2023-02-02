@@ -12,7 +12,7 @@
             <p> Prénom: {{personne.Nom}}</p>
             <p> Nom: {{personne.Prenom}}</p>
             <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
-            <a class="link" href="?page=addCoPersonne&id={{personne.IDPersonne}}">Ajouter les coordonnees</a>
+            <a class="link" href="?page=addCoPersonne&id={{personne.IDPersonne}}">Voir les coordonnees</a>
           </div>
           <br>
           <form method='POST' action="index.php?page=listePersonnes">
@@ -24,7 +24,7 @@
             <p> Prénom: {{dev.Nom}}</p>
             <p> Nom: {{dev.Prenom}}</p>
             <a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
-            <a class="link" href="?page=addCoPersonne&id={{dev.IDPersonne}}">Ajouter les coordonnees</a>
+            <a class="link" href="?page=addCoPersonne&id={{dev.IDPersonne}}">Voir les coordonnees</a>
           </div>
           {% endfor %}
           <h1>Supprimer des personnes</h1>

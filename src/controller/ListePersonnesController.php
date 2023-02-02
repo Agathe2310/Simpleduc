@@ -7,6 +7,10 @@ function listePersonnesController($twig, $db){
     if (isset($_POST['btnDeletePersonne'])) {
         if (!empty($_POST['liste'])){
             foreach($_POST['liste'] as $valeur){
+                $estundev = isDev($db, $valeur);
+                if ($estundev !== false){
+                    deleteDev($db, $valeur);
+                }
                 deletePersonne($db, $valeur);
             }
         }
@@ -28,7 +32,8 @@ function listePersonnesController($twig, $db){
         }
         
     }
-
+    
+    
 
     if (isset($_POST['btnModifPersonne'])) {
         echo $twig->render('modifPersonne.html.twig', []);

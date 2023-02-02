@@ -74,7 +74,7 @@
 				<p> <span class="fw-bold">IDEntre :</span> {{contrat.IDEntre}}</p>
 				<form enctype="multipart/form-data" method="post" id="{{contrat.IDContrat}}">
 					<input type="hidden" value="{{contrat.IDContrat}}" name="supprimerContrat"/>
-					</form>
+				</form>
 					<button type="submit" class="btn btn-outline-danger" name="submitSupprimerContrat" form="{{contrat.IDContrat}}">Supprimer Contrat</button>
 				<a class="btn btn-outline-primary" href="?page=modifierContrat&id={{contrat.IDContrat}}">Modifier ce contrat</a>
 			</div>

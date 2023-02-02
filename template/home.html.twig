@@ -20,6 +20,7 @@
 			</p>
 				<a href="?page=modifMdp&email={{session.login}}">Modifier votre mot de passe !</a>
 		</div>
+		{% if isdev is null %}
 		<div class="container card mb-3">
 			<h2 class="text-decoration-underline">Vos Groupes et Modules :</h2>
 			{% if equipes is defined %}
@@ -29,12 +30,14 @@
 					<span class="fs-4">Groupe N°{{ equipe.IDEquipe }} :</span>
 						{% if equipeselectionner != equipe.IDEquipe %}
 							<a class="link-light" href="?page=home&idequipe={{equipe.IDEquipe}}">Voir les membres et modules</a>
+						{% else %}
+							<a class="link-light" href="?page=home&idequipe=-1">Masquer ce groupe</a>
 						{% endif %}
 						</li>
 						{% if equipeselectionner == equipe.IDEquipe %}
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
-									<b>Chef du Groupe :</b>
+									<span class="fw-bold">Chef du Groupe :</span>
 									<ul class="list-group list-group-flush">
 										{% if chef is defined %}
 											<li class="list-group-item">
@@ -53,7 +56,7 @@
 									</ul>
 								</li>
 								<li class="list-group-item">
-									<b>Membres du Groupe : </b>
+									<span class="fw-bold">Membres du Groupe : </span>
 								{% for membre in membres %}
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">
@@ -70,7 +73,7 @@
 								{% endfor %}
 								</li>
 								<li class="list-group-item">
-									<b>Module(s) du Groupe : </b>
+									<span class="fw-bold">Module(s) du Groupe : </span>
 								{% if module is defined %}
 									{% for module in modules %}
 										<ul class="list-group list-group-flush">
@@ -110,7 +113,12 @@
 									<li class="list-group-item bg-danger"> Aucun outil maîtrisé sur votre profil !</li>	
 								{% else %}
 									{% for outiluser in outilsuser %}
-										<li class="list-group-item">Logiciel : {{outiluser.Libelle}} | Version : {{outiluser.Version}}</li>
+										<li class="list-group-item">Logiciel : {{outiluser.Libelle}} | Version : {{outiluser.Version}}
+											<form enctype="multipart/form-data" method="POST" id="{{outiluser.Code}}">
+												<input type="hidden" name="supprimerOutil" value="{{outiluser.Code}}">
+											</form>
+											<button class="btn btn-outline-danger" type="submit" name="submitSupprimerOutil" form="{{outiluser.Code}}">Supprimer cette Outil</button>
+										</li>
 									{% endfor %}
 								{% endif %}
 							</ul>
@@ -124,10 +132,12 @@
 						{% endfor %}
 						</select>
 						<input class="btn btn-outline-primary" type="submit" name="ajouterOutil" value="Ajouter l'Outil">
+
 						</form>
 					</div>
 				</div>
 		</div>
+		{% endif %}
 	{% else %}
 		<div class="alert alert-danger" role="alert">
 			<a href="?page=login" class="alert-link">Connectez vous !</a>

@@ -622,3 +622,11 @@ function ajouterMaitriserOutil($db, $iduser, $code)
     ]);
 }
 
+function deleteMaitriserOutil($db, $iduser, $code)
+{
+    $query = $db->prepare("DELETE FROM Maitriser WHERE IDPersonne = :idpersonne AND Code = :code");
+    $query->execute([
+        'idpersonne' => $iduser,
+        'code' => $code
+    ]);
+}

@@ -24,5 +24,6 @@ $routes = [
     'register' => 'registerController:0',
     'deconnexion' => 'deconnexionController:0',
     'confirmRegister' => 'confirmRegisterController:0',
+    'modifDev' => 'modifDevController:2',
     'modifMdp' => 'modificationMdpController:1'
 ];

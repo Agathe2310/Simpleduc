@@ -29,12 +29,14 @@ function listePersonnesController($twig, $db){
         
     }
 
-    
 
     if (isset($_POST['btnModifPersonne'])) {
         echo $twig->render('modifPersonne.html.twig', []);
 }
-    echo $twig->render('listePersonnes.html.twig', ["liste"=> $liste, "listeDev"=>$listeDev, "listeContact"=>$listeContact]);
+if (isset($_POST['btnModifDev'])) {
+    echo $twig->render('modifDev.html.twig', []);
+}
+    echo $twig->render('listePersonnes.html.twig', ["liste"=> $liste, "listeDev"=>$listeDev, "listeContact"=>$listeContact,]);
 
 
 }

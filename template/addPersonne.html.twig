@@ -1,19 +1,19 @@
 {% extends "layout.html.twig" %}
-
 {% block head %}
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>
 		Ajout d'une personne
 	</title>
-
+	
 </head>
 {% endblock %}
-
-
 {% block content %}
+<div class="container">
+	{% if erreur == "existe deja" %}
+	<p style="color: red;">Cette adresse mail existe déjà !</p>
+	{% endif %}
 	<form action="index.php?page=addPersonne" method="POST" class="">
 		<div class="mb-3">
 			<label for="nom" class="form-label">
@@ -28,19 +28,21 @@
 			<input  type="text" class="form-label" id="prenom" name="prenom">
 		</div>
 		<div class="mb-3"> 
-		<label for="email" class="form-label">
-			Adresse mail : 
-		</label>
-		<input  type="email" placeholder ='exemple@mail.com' class="form-label" id="email" name="email">
-	</div>
-	<div class="mb-3">
-	<label for="password" class="form-label">
-		Mot de Passe : 
-	</label>
-	<input  type="password" class="form-label" id="password" name="password">
-</div>
-    <button type="submit" class="btn btn-danger" name="btnAddDev">
-Ajouter en tant que développeur</button>
-<button type="submit" class="btn btn-danger" name="btnAddClient">
-	Ajouter en tant que contact d'entreprise</button>
-</form>{% endblock %}
+			<label for="email" class="form-label">
+				Adresse mail : 
+			</label>
+			<input  type="email" placeholder ='exemple@mail.com' class="form-label" id="email" name="email">
+		</div>
+		<div class="mb-3">
+			<label for="password" class="form-label">
+				Mot de Passe : 
+			</label>
+			<input  type="password" class="form-label" id="password" name="password">
+		</div>
+		<button type="submit" class="btn btn-danger" name="btnAddDev">
+			Ajouter en tant que développeur</button>
+			<button type="submit" class="btn btn-danger" name="btnAddClient">
+				Ajouter en tant que contact d'entreprise</button>
+			</form>
+		</div>
+			{% endblock %}

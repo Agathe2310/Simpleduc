@@ -10,7 +10,7 @@ function homeController($twig, $db)
 
     $role = getOneRole($db, $role)['Label'];
     $infos = getOneUser($db, $_SESSION['login']);
-    $equipes = getEquipe($db, $_SESSION['iduser']);
+    $equipes = getEquipeIDUser($db, $_SESSION['iduser']);
     $outils = getAllOutils($db);
     $outilsuser = getOutilsUser($db, $_SESSION['iduser']);
 

@@ -25,7 +25,7 @@ function messagerieController($twig, $db, $nbNotifs)
         }
     }
 
-    $messages = getMessageFromDest($db, $_SESSION['idUser']);
+    $messages = getMessageFromDest($db, $_SESSION['iduser']);
 
     var_dump("POST : ");
     var_dump($_POST);
@@ -37,6 +37,6 @@ function messagerieController($twig, $db, $nbNotifs)
     echo $twig->render("messagerie.html.twig", [
         'messages' => $messages,
         'nbNotifs' => $nbNotifs,
-        'messagesEnvoyes' => getMessageFromEmet($db, $_SESSION['idUser'])
+        'messagesEnvoyes' => getMessageFromEmet($db, $_SESSION['iduser'])
     ]);
 }

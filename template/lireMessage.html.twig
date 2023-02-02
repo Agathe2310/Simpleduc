@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Messagerie{% endblock %}
+{% block messagerieNotif %}{{nbNotifs}}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Messagerie</h1>
+  <div class="card p-5">
+    <h2 style="border-bottom: 2px solid black;">Message de {{message.Emetteur.Nom}} : {{message.Objet}}</h2>
+    <p>{{message.Date}}</p>
+
+    <p>
+      {{message.Sujet}}
+    </p>
+    
+  </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-function addModuleController($twig, $db)
+function addModuleController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
@@ -26,6 +26,7 @@ function addModuleController($twig, $db)
     echo $twig->render("addModule.html.twig", [
         "modules" => getAllModules($db),
         "equipes" => getAllEquipes($db),
-        "contrats" => getAllContrats($db)
+        "contrats" => getAllContrats($db),
+        'nbNotifs' => $nbNotifs
     ]);
 }

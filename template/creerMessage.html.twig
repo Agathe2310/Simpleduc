@@ -1,0 +1,45 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block messagerieNotif %}{{nbNotifs}}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Messagerie</h1>
+  <div class="card p-5">
+
+    <h2>Envoyer un message :</h2>
+
+    <form action="?page=creerMessage" method="POST">
+      <p>
+        Destinataire :
+        <select name="Destinataire">
+          <option value="0">Entrez un Destinataire</option>
+          {% for user in users %}
+          <option value="{{user.IDPersonne}}">{{user.Nom}}</option>
+          {% endfor %}
+        </select>
+      </p>
+
+      <p>
+        Objet :
+      </p>
+      <p>
+        <input type="text" name="Objet" placeholder="Objet" style="width:100%;max-width:1000px">
+      </p>
+
+      <p>
+        Message :
+      </p>
+      <p>
+        <textarea name="Message" placeholder="Message" style="width:100%;max-width:1000px;"></textarea>
+      </p>
+
+      <input type="submit" value="Envoyer le message" class="btn btn-primary" name="btnEnvoyerMessage">
+    </form>
+
+
+  </div>
+</div>
+{% endblock %}

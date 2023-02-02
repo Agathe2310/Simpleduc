@@ -1,5 +1,5 @@
 <?php
-function addPersonneController($twig, $db) {
+function addPersonneController($twig, $db, $nbNotifs) {
     include_once '../src/model/ProjetModel.php';
     $erreur = "";
     if (isset($_POST['btnAddDev'])) {
@@ -28,5 +28,8 @@ function addPersonneController($twig, $db) {
     }   
     
 
-    echo $twig->render('addPersonne.html.twig', ["erreur" => $erreur]);
+    echo $twig->render('addPersonne.html.twig', [
+    'nbNotifs' => $nbNotifs,
+    "erreur" => $erreur
+]);
 }

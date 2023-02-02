@@ -1,6 +1,6 @@
 <?php
 
-function loginController($twig, $db)
+function loginController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';
 

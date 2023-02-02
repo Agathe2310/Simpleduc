@@ -1,0 +1,81 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block messagerieNotif %}{{nbNotifs}}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Messagerie</h1>
+  <div class="card p-5 mb-5">
+
+    <a href="?page=creerMessage" style="text-decoration: none; padding:10px; border-radius:5px; color:black; border: 1px solid black;width:200px">Envoyer un message</a>
+    
+    <h2>Vos Messages :</h2>
+
+    <form action="?page=messagerie" method="POST">
+
+      <div style="display:grid ;grid-template-columns: 1fr 1fr 1fr 4fr;" class="m-3">
+        <input type="submit" value="Mettre en Non Lu" name="btnNonLu">
+        <input type="submit" value="Mettre en Lu" name="btnLu">
+        <input type="submit" value="Supprimer" name="btnSupp">
+      </div>
+
+      {% for message in messages %}
+      <div style="display:grid ;grid-template-columns: 1fr 12fr;">
+
+        <input type="checkbox" name="selectionne[]" value="{{message.IDMessage}}" style="width: 30px;">
+
+        <a style="display: block; text-decoration:none;" class="table-hover"
+          href="?page=lireMessage&id={{message.IDMessage}}&lire=1">
+          <div class="card p-2" style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
+            <p>Message de : {{message.Emetteur.Nom}}</p>
+            <p>Objet : {{message.Objet}}</p>
+            <p>Reçu : {{message.Date}}</p>
+            {% if message.Lu == 1 %}
+            <p>Lu</p>
+            {% else %}
+            <p style="color: red;">Non Lu</p>
+            {% endif %}
+          </div>
+        </a>
+
+      </div>
+
+      {% endfor %}
+    </form>
+
+  </div>
+
+
+  <div class="card p-5 mb-5">
+
+    <a href="?page=creerMessage" style="text-decoration: none; padding:10px; border-radius:5px; color:black; border: 1px solid black;width:200px">Envoyer un message</a>
+    
+    <h2>Messages Envoyés :</h2>
+
+      {% for message in messagesEnvoyes %}
+      <div style="display:grid ;grid-template-columns: 1fr 12fr;">
+        <div></div>
+        <a style="display: block; text-decoration:none;" class="table-hover"
+          href="?page=lireMessage&id={{message.IDMessage}}">
+          <div class="card p-2" style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
+            <p>Message pour : {{message.Destinataire.Nom}}</p>
+            <p>Objet : {{message.Objet}}</p>
+            <p>Reçu : {{message.Date}}</p>
+            {% if message.Lu == 1 %}
+            <p>Lu</p>
+            {% else %}
+            <p style="color: red;">Non Lu</p>
+            {% endif %}
+          </div>
+        </a>
+
+      </div>
+
+      {% endfor %}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

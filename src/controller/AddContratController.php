@@ -1,6 +1,6 @@
 <?php 
 
-function addContratController($twig,$db){
+function addContratController($twig,$db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
     if(isset($_POST['DateSignature']) && isset($_POST['CoutGlobal']) && isset($_POST['DateDebut']) && isset($_POST['DateFin']) && isset($_POST['idPersonne']) && isset($_POST['idEntre']) && isset($_POST['btnAddContrat'])){
@@ -22,7 +22,8 @@ function addContratController($twig,$db){
     echo $twig -> render("addContrat.html.twig", [
         'allContrat' => $allContrat,
         'personnes' => $listepersonnes,
-        'entreprises' => $listeentreprise
+        'entreprises' => $listeentreprise,
+        'nbNotifs' => $nbNotifs
     ]);
 }
 

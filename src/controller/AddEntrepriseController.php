@@ -1,6 +1,6 @@
 <?php 
 
-function addEntrepriseController($twig,$db){
+function addEntrepriseController($twig, $db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
     if(isset($_POST['nomEntreprise']) && isset($_POST['btnAddEntreprise'])){
@@ -18,7 +18,8 @@ function addEntrepriseController($twig,$db){
     }
     $AllEntreprise = getAllEntreprise($db);
     echo $twig -> render("addEntreprise.html.twig", [
-        'allEntreprise' => $AllEntreprise
+        'allEntreprise' => $AllEntreprise,
+        'nbNotifs' => $nbNotifs
     ]);
 }
 

@@ -1,5 +1,5 @@
 <?php
-function ModifCoController($twig, $db){
+function ModifCoController($twig, $db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';
 
     if (isset($_GET["id"])) {
@@ -18,6 +18,7 @@ function ModifCoController($twig, $db){
     
     echo $twig->render('modifCoPersonne.html.twig', [
         "co" => getCo($db, $IDPersonne),
+        'nbNotifs' => $nbNotifs
    ]);
 }
 

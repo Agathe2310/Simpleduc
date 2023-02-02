@@ -1,5 +1,5 @@
 <?php
-function ModifPersonneController($twig, $db){
+function ModifPersonneController($twig, $db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';
 
     if (isset($_GET["id"])) {
@@ -25,6 +25,7 @@ function ModifPersonneController($twig, $db){
     
     echo $twig->render('modifPersonne.html.twig', [
         "personne" => $email,
+        'nbNotifs' => $nbNotifs
    ]);
 }
 

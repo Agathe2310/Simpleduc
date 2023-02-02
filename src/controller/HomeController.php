@@ -1,6 +1,6 @@
 <?php
 
-function homeController($twig, $db)
+function homeController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
@@ -50,7 +50,8 @@ function homeController($twig, $db)
         'equipes' => $equipes,
         'outils' => $outils,
         'outilsuser' => $outilsuser,
-        'equipeselectionner' => -1 // Pour qu'on puisse voir le groupe 'Voir tout' les membres du groupes 0
+        'equipeselectionner' => -1, // Pour qu'on puisse voir le groupe 'Voir tout' les membres du groupes 0
+        'nbNotifs' => $nbNotifs
     ]);
     }
 }

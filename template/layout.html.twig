@@ -30,6 +30,8 @@
                     <li class="nav-item"><a href="?page=addOutil" class="nav-link">Outils</a></li>
                     {% if session.login is defined %}
                     <li class="nav-item"><a href="?page=deconnexion" class="nav-link">Deconnexion</a></li>
+                    <li class="nav-item"><a href="?page=messagerie" class="nav-link">Messagerie
+                           <b style="color: red;">{% block messagerieNotif %}{% endblock %}</b></a></li>
                     {% else %}
                     <li class="nav-item"><a href="?page=login" class="nav-link">Connexion</a></li>
                     {% endif %}

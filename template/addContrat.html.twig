@@ -1,68 +1,82 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	Page ajouter
+	Ajouter Contrat
 {% endblock %}
 
 {% block content %}
-	<h1>Contrat</h1>
-
+<div class="container">
 	<div class="container">
-		<form
-			action="index.php?page=addContrat" method="POST" class="encadre grande-margin-lr">
-			<p>
-				<label for="DateSignature" class="form-label">Date de la Signature</label>
-			</p>
-			<p>
-				<input type="date" class="form-control" id="DateSignature" name="DateSignature"></p>
-			</p>
-				<label for="CoutGlobal" class="form-label">Cout Global</label>
-			</p>
-			<p>
-				<input type="number" class="form-control" id="CoutGlobal" name="CoutGlobal" step="0.01">
-			</p>
-			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
-			<p>
-				<label for="DateDebut" class="form-label">Date Début</label>
-			</p>
-			<p>
-				<input type="date" class="form-control" id="DateDebut" name="DateDebut">
-			</p>
-			<p>
-				<label for="DateFin" class="form-label">Date Fin</label>
-			</p>
-			<p>
-				<input type="date" class="form-control" id="DateFin" name="DateFin">
-			</p>
-			<p>
-				<label for="idPersonne" class="form-label">ID Personne</label>
-			</p>
-			<p>
-				<input type="number" min="1" step="1" class="form-control" id="idPersonne" name="idPersonne">
-			</p>
-			<p>
-				<label for="idEntre" class="form-label">ID Entreprise</label>
-			</p>
-			<p>
-				<input type="number" min="1" step="1" class="form-control" id="idEntre" name="idEntre">
-			</p>
-		<button type="submit" class="btn btn-primary" name="btnAddContrat">Ajouter</button>
-		<!-- On va vouloir détecter quand on appuie-->
-	</form>
-	{% for contrat in allContrat %}
-		<div class="container">
-    		<p> Numéro du contrat : {{contrat.IDContrat}} <p>
-			<p> Date Signature : {{contrat.DateSignature}} </p>
-			<p> CoutGlobal : {{contrat.CoutGlobal}} <p>
-			<p> Début du contrat : {{contrat.DateDebut}} </p>
-			<p> Fin du Contrat  : {{contrat.DateFin}} <p>
-			<p> IDPersonne : {{contrat.IDPersonne}} </p>
-			<p> IDEntre : {{contrat.IDEntre}}</p>
-			<form enctype="multipart/form-data" method="post" id="{{contrat.IDContrat}}">
-				<input type="hidden" value="{{contrat.IDContrat}}" name="supprimerContrat"/>
-				</form>
-				<button type="submit" name="submitSupprimerContrat" form="{{contrat.IDContrat}}">Supprimer Contrat</button>
-			<a class="link" href="?page=modifierContrat&id={{contrat.IDContrat}}">Modifier ce contrat</a>
+		<h2 class="text-decoration-underline">Ajouter un Contrat :</h2>
+		<div class="container card mb-3">
+			<form
+				action="index.php?page=addContrat" method="POST" class="encadre grande-margin-lr">
+				<p>
+					<label for="DateSignature" class="form-label">Date de la Signature</label>
+				</p>
+				<p>
+					<input type="date" class="form-control" id="DateSignature" name="DateSignature"></p>
+				</p>
+					<label for="CoutGlobal" class="form-label">Cout Global</label>
+				</p>
+				<p>
+					<input type="number" class="form-control" id="CoutGlobal" name="CoutGlobal" step="0.01">
+				</p>
+				<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
+				<p>
+					<label for="DateDebut" class="form-label">Date Début</label>
+				</p>
+				<p>
+					<input type="date" class="form-control" id="DateDebut" name="DateDebut">
+				</p>
+				<p>
+					<label for="DateFin" class="form-label">Date Fin</label>
+				</p>
+				<p>
+					<input type="date" class="form-control" id="DateFin" name="DateFin">
+				</p>
+				<p>
+					<label for="idPersonne" class="form-label">ID Personne</label>
+				</p>
+				<p>
+					<select class="form-select" id="idPersonne" name="idPersonne">
+						{% for personne in personnes %}
+						<option value="{{personne.IDPersonne}}">{{personne.IDPersonne}} / {{personne.Nom}} / {{personne.Prenom}} / {{personne.Email}}</option>
+						{% endfor %}
+					</select>
+				</p>
+				<p>
+					<label for="idEntre" class="form-label">ID Entreprise</label>
+				</p>
+				<p>
+					<select class="form-select" id="idEntre" name="idEntre">
+						{% for entreprise in entreprises %}
+						<option value="{{entreprise.IDEntre}}">{{entreprise.IDEntre}} / {{entreprise.Nom}}</option>
+						{% endfor %}
+					</select>
+				</p>
+				<button type="submit" class="btn btn-primary" name="btnAddContrat">Ajouter</button>
+			</form>
 		</div>
+	</div>
+	<div class="container">
+		<h2 class="text-decoration-underline">Liste des Contrats :</h2>
+		{% for contrat in allContrat %}
+			<div class="container card mb-3 mt-3">
+				<p> <span class="fw-bold">Numéro du contrat :</span> {{contrat.IDContrat}} </p>
+				<p> <span class="fw-bold">Date Signature :</span> {{contrat.DateSignature}} </p>
+				<p> <span class="fw-bold">CoutGlobal :</span> {{contrat.CoutGlobal}} </p>
+				<p> <span class="fw-bold">Début du contrat :</span> {{contrat.DateDebut|date("m/d/Y")}} </p>
+				<p> <span class="fw-bold">Fin du Contrat  :</span> {{contrat.DateFin|date("m/d/Y")}} </p>
+				<p> <span class="fw-bold">IDPersonne :</span> {{contrat.IDPersonne}} </p>
+				<p> <span class="fw-bold">IDEntre :</span> {{contrat.IDEntre}}</p>
+				<form enctype="multipart/form-data" method="post" id="{{contrat.IDContrat}}">
+					<input type="hidden" value="{{contrat.IDContrat}}" name="supprimerContrat"/>
+					</form>
+					<button type="submit" class="btn btn-outline-danger" name="submitSupprimerContrat" form="{{contrat.IDContrat}}">Supprimer Contrat</button>
+				<a class="btn btn-outline-primary" href="?page=modifierContrat&id={{contrat.IDContrat}}">Modifier ce contrat</a>
+			</div>
 		{% endfor %}
-</div>{% endblock %}
+	</div>
+</div>
+{% endblock %}

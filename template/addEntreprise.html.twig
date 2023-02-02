@@ -5,56 +5,31 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Ajouter une Entreprise dans la base de donnée</h1>
-
-	<div class="container">
-		<form
-			action="index.php?page=addEntreprise" method="POST" class="encadre grande-margin-lr">
-			<!-- je veux que tu ailles sur ma route addProduct en méthode POST => utilisation de la variable globale $_POST-->
+<div class="container">
+	<h2 class="text-decoration-underline">Ajouter une Entreprise :</h2>
+	<div class="container card mb-3">
+	  	<form method="POST" class="encadre grande-margin-lr">
 			<p>
 				<label for="renduLabel" class="form-label">Nom de l'entreprise</label>
 			</p>
-			<p><input type="text" class="form-control" id="renduLabel" name="nomEntreprise"></p>
-			{#<p>
-				<label for="renduDescription" class="form-label">Description</label>
-			</p>
 			<p>
-				<textarea class="form-control" id="renduDescription" name="renduDescription" rows="3"></textarea>
+				<input type="text" class="form-control" id="renduLabel" name="nomEntreprise">
 			</p>
-			<!-- celui qui va nous permettre d'identifier et de recuperer la valeur-->
-			<p>
-				<label for="renduGroupe" class="form-label">Groupe</label>
-			</p>
-			<p>
-				<select class="form-select" id="renduGroupe" name="renduGroupe"></p>
-				<option value="">Saisir le groupe</option>
-				<option value="1">SN1</option>
-				<option value="2">SN2</option>
-			</p>
-		</select>
-		<p>
-			<label for="meeting-time">Date de début :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-start" value=""></p>
-		<p>
-			<label for="meeting-time">Date de fin :</label>
-		</p>
-		<p><input type="datetime-local" id="meeting-time" name="trip-end" value=""></p>
-		<input type="hidden" name="prof" value="1"> #}
-		<button type="submit" class="btn btn-primary" name="btnAddEntreprise">Ajouter</button>
-		<!-- On va vouloir détecter quand on appuie-->
-	</form>
+			<input type="submit" class="btn btn-primary" name="btnAddEntreprise" value="Ajouter l'Entreprise">
+		</form>
 	</div>
-	<br>
+	<h2 class="text-decoration-underline">Liste des Entreprises :</h2>
 	{% for entreprise in allEntreprise %}
-		<div class="container">
-    		<p> IDEntreprise : {{entreprise.IDEntre}}</p>
-			<p> NomEntreprise : {{entreprise.Nom}}</p>
+		<div class="container card mb-3 mt-3">
+    		<p> <span class="fw-bold">IDEntreprise :</span> {{entreprise.IDEntre}}</p>
+			<p> <span class="fw-bold">NomEntreprise :</span> {{entreprise.Nom}}</p>
 			<form enctype="multipart/form-data" method="post" id="{{entreprise.IDEntre}}">
 			<input type="hidden" value="{{entreprise.IDEntre}}" name="supprimerEntreprise"/>
 			</form>
-			<button type="submit" name="submitSupprimerEntreprise" form="{{entreprise.IDEntre}}">Supprimer Entreprise</button>
-			<a class="link" href="?page=modifierEntreprise&id={{entreprise.IDEntre}}">Modifier</a>
+			<button class="btn btn-outline-danger" type="submit" name="submitSupprimerEntreprise" form="{{entreprise.IDEntre}}">Supprimer Entreprise</button>
+			<a class="btn btn-outline-primary" href="?page=modifierEntreprise&id={{entreprise.IDEntre}}">Modifier</a>
 		</div>
 	{% endfor %}
+	</div>
+</div>
 {% endblock %}

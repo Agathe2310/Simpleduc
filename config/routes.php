@@ -19,6 +19,7 @@ $routes = [
     'addCoPersonne' => 'addCoPersonneController:2',
     'listeCo' => 'listeCoController:2',
     'modifCoPersonne' => 'modifCoController:2',
+    'addOutil' => 'addOutilController:2',
     'login' => 'loginController:0',
     'register' => 'registerController:0',
     'deconnexion' => 'deconnexionController:0',

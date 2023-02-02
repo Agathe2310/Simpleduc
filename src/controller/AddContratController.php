@@ -17,8 +17,12 @@ function addContratController($twig,$db){
         supprimerContrat($db, $_POST['supprimerContrat']);
     }
     $allContrat = getAllContrat($db);
+    $listepersonnes = listePersonnes($db);
+    $listeentreprise = listeEntreprises($db);
     echo $twig -> render("addContrat.html.twig", [
-        'allContrat' => $allContrat
+        'allContrat' => $allContrat,
+        'personnes' => $listepersonnes,
+        'entreprises' => $listeentreprise
     ]);
 }
 

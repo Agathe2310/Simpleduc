@@ -4,9 +4,6 @@ function loginController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';
 
-    var_dump(" / POST : ");
-    var_dump($_POST);
-    var_dump(password_hash("yyy", PASSWORD_DEFAULT));
     $user = 1;
     if (isset($_POST['submitLogin'])) {
         if (
@@ -19,7 +16,6 @@ function loginController($twig, $db, $nbNotifs)
 
 
             $user = getOneUser($db, $email);
-            var_dump($user);
 
             if ($user != null) {
 

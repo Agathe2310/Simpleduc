@@ -15,18 +15,19 @@ function listePersonnesController($twig, $db, $nbNotifs){
             }
         }
     }
+
     $liste = listePersonnes($db);
     $listeDev = array();
     $listeContact = array();
     foreach ($liste as $i){
         $var1 = isDev($db, $i[0]);
-        #var_dump( $var);
+
         if ($var1 !== false){
             array_push($listeDev, $i);
         }
         $var2 = isContact($db, $i[0]);
-        if ($var2 !== false){
-            if ($var1 == false){
+        if ($var2 !== false) {
+            if ($var1 == false) {
                 array_push($listeContact, $i);
             }
         }

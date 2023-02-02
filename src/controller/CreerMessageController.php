@@ -7,8 +7,6 @@ function creerMessageController($twig, $db, $nbNotifs)
 
     $users = listePersonnes($db);
 
-    var_dump("POST : ");
-    var_dump($_POST);
 
     if (isset($_POST['btnEnvoyerMessage'])) {
         if ($_POST['Objet'] != "" && $_POST['Message'] != "" && $_POST['Destinataire'] != "0") {

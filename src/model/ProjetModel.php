@@ -229,7 +229,9 @@ function getModule($db, $id)
 
 function updateModule($db, $id, $contrat, $equipe, $etat)
 {
-    $query = $db->prepare("UPDATE Module SET IDContrat = :IDContrat, IDEquipe = :IDEquipe, Etat = :Etat WHERE IDModule = :IDModule ");
+    $query = $db->prepare("UPDATE Module 
+                            SET IDContrat = :IDContrat, IDEquipe = :IDEquipe, Etat = :Etat 
+                            WHERE IDModule = :IDModule ");
     $query->execute([
         'IDContrat' => $contrat,
         'IDEquipe' => $equipe,

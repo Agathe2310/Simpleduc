@@ -32,7 +32,6 @@ function homeController($twig, $db, $nbNotifs)
             $membres = getMembresFromEquipe($db, $_GET['idequipe']);
             $chef = getChefFromEquipe($db, $_GET['idequipe']);
             $module = getModulesFromEquipe($db, $_GET['idequipe']);
-            var_dump($module);
             echo $twig->render('home.html.twig', [
                 'role' => $role,
                 'date' =>  date('Y-m-d H:i:s'),

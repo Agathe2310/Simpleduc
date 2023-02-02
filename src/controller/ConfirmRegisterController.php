@@ -23,7 +23,6 @@ function confirmRegisterController($twig, $db)
                 $message = "Votre identifiant de vérification est expiré !";
                 $user = getOneUserFromID($db, $confCompte['IDPersonne']);
                 delConfirmation($db, $confCompte['IDPersonne']);
-                var_dump($user);
                 envoyerVerification($db, $twig, 
                 $user['IDPersonne'], $user['Email']);
             }

@@ -4,7 +4,6 @@ function modifierContratController($twig,$db){
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
 
-    var_dump($_GET['id']);
     if(!empty($_GET['id'])){
         $id = $_GET['id'];
         $Contrat = getOneContrat($db,$id);

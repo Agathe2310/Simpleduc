@@ -13,7 +13,7 @@ function addPersonneController($twig, $db, $nbNotifs) {
     
         } else {
             $erreur = "existe deja";}
-
+        }
         if (isset($_POST['btnAddClient'])) {
             $nom = htmlspecialchars($_POST["nom"]);
             $prenom = htmlspecialchars($_POST["prenom"]);
@@ -24,8 +24,7 @@ function addPersonneController($twig, $db, $nbNotifs) {
                 
             } else {
                 $erreur = "existe deja";}
-        }
-    }   
+        } 
     
 
     echo $twig->render('addPersonne.html.twig', [

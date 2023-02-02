@@ -31,7 +31,7 @@ function listePersonnesController($twig, $db, $nbNotifs){
                 array_push($listeContact, $i);
             }
         }
-        
+    var_dump($listeContact);
     }
 
     

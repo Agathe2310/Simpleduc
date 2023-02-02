@@ -24,7 +24,7 @@ $db = getConnection($config);
 $twig = initTwig('../template/');
 
 $nbNotifs = 0;
-if (isset($_SESSION['idUser'])) $nbNotifs = count(getMessagesNonLu($db, $_SESSION['idUser']));
+if (isset($_SESSION['iduser'])) $nbNotifs = count(getMessagesNonLu($db, $_SESSION['iduser']));
 
 $actionController = initRouter($routes, $db);
 $actionController($twig, $db, $nbNotifs);

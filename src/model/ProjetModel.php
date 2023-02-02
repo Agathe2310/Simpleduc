@@ -237,7 +237,7 @@ function updateModule($db, $id, $contrat, $equipe, $etat)
 
 function getAllEquipes($db)
 {
-    $query = $db->prepare("SELECT IDEquipe, IDPersonne FROM Equipe");
+    $query = $db->prepare("SELECT IDEquipe FROM Equipe");
     $query->execute([]);
 
     $product = $query->fetchAll();
@@ -287,7 +287,7 @@ function updatePersonne($db, $nom, $prenom, $IDPersonne){
     ]);
 }
 
-function getEquipe($db, $IDPersonne){
+function getEquipeIDPersonne($db, $IDPersonne){
     $query = $db -> prepare("SELECT IDEquipe FROM regrouper WHERE IDPersonne = :IDPersonne "); 
     $query->execute([
         "IDPersonne" => $IDPersonne
@@ -296,7 +296,7 @@ function getEquipe($db, $IDPersonne){
     return $product;
 }
 function listePersonnes($db){
-    $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom FROM Personne"); 
+    $query = $db -> prepare("SELECT IDPersonne, Nom, Prenom, Email FROM Personne"); 
     $query -> execute([]);
     $liste = $query->fetchAll();
     return $liste;
@@ -307,6 +307,12 @@ function hasCo($db, $IDPersonne){
     return $query -> execute([
         'IDPersonne'=>$IDPersonne
     ]);
+}
+function listeEntreprises($db){
+    $query = $db -> prepare("SELECT IDEntre, Nom FROM Entreprise_Cliente"); 
+    $query -> execute([]);
+    $listeEntre = $query->fetchAll();
+    return $listeEntre;
 }
 
 
@@ -503,5 +509,99 @@ $query = $db -> prepare("UPDATE Personne SET PasswordUser = :nouveaumdp WHERE Em
     return $query->execute([
         'email' => $email,
         'nouveaumdp' => $nouveaumdp
+    ]);
+}
+
+function getEquipeIDUser($db, $iduser){
+    $query = $db->prepare("SELECT IDEquipe FROM regrouper WHERE IDPersonne = :iduser");
+    $query ->execute([
+        'iduser'=> $iduser,
+    ]);
+    $equipes = $query->fetchAll();
+    return $equipes;
+}
+
+function getMembresFromEquipe($db, $idequipe){
+    $query = $db->prepare("SELECT Nom, Prenom, Email FROM Personne 
+                            INNER JOIN regrouper ON Personne.IDPersonne = regrouper.IDPersonne
+                            WHERE regrouper.IDEquipe = :idequipe");
+    $query ->execute([
+        'idequipe'=> $idequipe,
+    ]);
+    $membres = $query->fetchAll();
+    return $membres;
+}
+
+function getChefFromEquipe($db, $idequipe){
+    $query = $db->prepare("SELECT Nom, Prenom, Email FROM Personne 
+                            INNER JOIN Equipe ON Personne.IDPersonne = Equipe.IDChef
+                            WHERE Equipe.IDEquipe = :idequipe");
+    $query ->execute([
+        'idequipe'=> $idequipe,
+    ]);
+    $chef = $query->fetch();
+    return $chef;
+}
+
+function getModulesFromEquipe($db, $idequipe){
+    $query = $db->prepare("SELECT IDModule, Etat, IDContrat FROM Module
+                            WHERE Module.IDEquipe = :idequipe");
+    $query ->execute([
+        'idequipe'=> $idequipe,
+    ]);
+    $chef = $query->fetchAll();
+    return $chef;
+}
+
+function addOutil($db, $libelle, $version)
+{
+    $query = $db->prepare("INSERT INTO Outil (Libelle, `Version`) VALUES (:Libelle, :versionlogiciel)");
+    return $query->execute([
+        'Libelle' => $libelle,
+        'versionlogiciel' => $version
+    ]);
+}
+
+function getAllOutils($db)
+{
+    $query = $db->prepare("SELECT Code, Libelle, `Version`
+                            FROM Outil ");
+    $query->execute([]);
+    $allOutils = $query->fetchAll();
+    return $allOutils;
+}
+
+function getOutilsUser($db, $iduser)
+{
+    $query = $db->prepare("SELECT Outil.Code, Libelle, `Version`
+                            FROM Outil 
+                            INNER JOIN Maitriser ON Outil.Code = Maitriser.Code
+                            WHERE Maitriser.IDPersonne = :idpersonne");
+    $query->execute([
+        'idpersonne' => $iduser
+    ]);
+    $OutilsUser = $query->fetchAll();
+    return $OutilsUser;
+}
+
+function getOutilsRechercher($db, $iduser, $libelleOutil){
+    $query = $db->prepare("SELECT Outil.Code, Libelle, `Version`
+                            FROM Outil 
+                            INNER JOIN Maitriser ON Outil.Code = Maitriser.Code
+                            WHERE Maitriser.IDPersonne = :idpersonne AND Outil.Libelle = :libelleOutil");
+    $query->execute([
+        'idpersonne' => $iduser,
+        'libelleOutil' => $libelleOutil
+    ]);
+    $OutilsUserRechercher = $query->fetchAll();
+    return $OutilsUserRechercher;
+}
+
+function ajouterMaitriserOutil($db, $iduser, $code)
+{
+    $query = $db->prepare("INSERT INTO Maitriser (IDPersonne, Code) VALUES (:idpersonne, :code)");
+    $query->execute([
+        'idpersonne' => $iduser,
+        'code' => $code
     ]);
 }

@@ -18,7 +18,7 @@ function ModifDevController($twig, $db){
         deleteDev($db, $IDPersonne);
     }
 
-    $Equipe = getEquipe($db, $IDPersonne);
+    $Equipe = getEquipeIDPersonne($db, $IDPersonne);
 
     
     echo $twig->render('modifDev.html.twig', [

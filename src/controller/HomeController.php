@@ -12,10 +12,6 @@ function homeController($twig, $db, $nbNotifs)
             $role = $_SESSION['role'];
             $role = getOneRole($db, $role)['Label'];
         }
-        $infos = getOneUser($db, $_SESSION['login']);
-        $equipes = getEquipeIDUser($db, $_SESSION['iduser']);
-        $outils = getAllOutils($db);
-        $outilsuser = getOutilsUser($db, $_SESSION['iduser']);
 
         if (isset($_POST['ajouterOutil'])) {
             ajouterMaitriserOutil($db, $_SESSION['iduser'], $_POST['CodeOutil']);
@@ -27,12 +23,21 @@ function homeController($twig, $db, $nbNotifs)
             }
         }
 
+        if (isset($_POST['submitSupprimerOutil'])){
+            deleteMaitriserOutil($db, $_SESSION['iduser'], $_POST['supprimerOutil']);
+        }
+
+
+        $infos = getOneUser($db, $_SESSION['login']);
+        $equipes = getEquipeIDUser($db, $_SESSION['iduser']);
+        $outils = getAllOutils($db);
+        $outilsuser = getOutilsUser($db, $_SESSION['iduser']);
+        $isdev = isDev($db, $_SESSION['iduser']);
 
         if (isset($_GET['idequipe'])) {
             $membres = getMembresFromEquipe($db, $_GET['idequipe']);
             $chef = getChefFromEquipe($db, $_GET['idequipe']);
             $module = getModulesFromEquipe($db, $_GET['idequipe']);
-            var_dump($module);
             echo $twig->render('home.html.twig', [
                 'role' => $role,
                 'date' =>  date('Y-m-d H:i:s'),
@@ -43,7 +48,8 @@ function homeController($twig, $db, $nbNotifs)
                 'chef' => $chef,
                 'modules' => $module,
                 'outils' => $outils,
-                'outilsuser' => $outilsuser
+                'outilsuser' => $outilsuser,
+                'isdev' => $isdev
             ]);
         } else {
             echo $twig->render('home.html.twig', [
@@ -53,15 +59,14 @@ function homeController($twig, $db, $nbNotifs)
                 'equipes' => $equipes,
                 'outils' => $outils,
                 'outilsuser' => $outilsuser,
-                'equipeselectionner' => -1, // Pour qu'on puisse voir le groupe 'Voir tout' les membres du groupes 0
-                'nbNotifs' => $nbNotifs
+                'nbNotifs' => $nbNotifs,
+                'isdev' => $isdev
             ]);
         }
     } else {
 
         echo $twig->render('home.html.twig', [
             'date' =>  date('Y-m-d H:i:s'),
-            'equipeselectionner' => -1, // Pour qu'on puisse voir le groupe 'Voir tout' les membres du groupes 0
             'nbNotifs' => $nbNotifs
         ]);
     }

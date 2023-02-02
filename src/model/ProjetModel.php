@@ -306,6 +306,12 @@ function listePersonnes($db){
     return $liste;
 }
 
+function hasCo($db, $IDPersonne){
+    $query = $db -> prepare("SELECT Rue, Ville, Code_Postal, email FROM Coordonnees WHERE IDPersonne = :IDPersonne ");
+    return $query -> execute([
+        'IDPersonne'=>$IDPersonne
+    ]);
+}
 function listeEntreprises($db){
     $query = $db -> prepare("SELECT IDEntre, Nom FROM Entreprise_Cliente"); 
     $query -> execute([]);
@@ -314,26 +320,26 @@ function listeEntreprises($db){
 }
 
 
-function deletePersonne($db, $IDPersonne)
-{
-    $query = $db->prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne ");
-    return $query->execute([
+function deletePersonne($db, $IDPersonne){
+    $query = $db -> prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne "); 
+    $query2 = $db -> prepare("DELETE FROM Contact WHERE IDPersonne = :IDPersonne ");
+    $query2->execute([
         'IDPersonne' => $IDPersonne
     ]);
+    return $query->execute([
+        'IDPersonne' => $IDPersonne]);
+    
 }
 
 function deleteDev($db, $IDPersonne){
     $query = $db -> prepare("DELETE FROM regrouper WHERE IDPersonne = :IDPersonne");
     $query2 = $db -> prepare("DELETE FROM Equipe WHERE IDPersonne = :IDPersonne");
     $query3 = $db -> prepare("DELETE FROM Dev WHERE IDPersonne = :IDPersonne");
-    $query4 = $db -> prepare("DELETE FROM Personne WHERE IDPersonne = :IDPersonne"); 
     $query->execute([
         'IDPersonne' => $IDPersonne]);
     $query2->execute([
             'IDPersonne' => $IDPersonne]);
-    $query3->execute([
-                'IDPersonne' => $IDPersonne]);
-    return $query4->execute([
+    return $query3->execute([
         'IDPersonne' => $IDPersonne
     ]);
 }

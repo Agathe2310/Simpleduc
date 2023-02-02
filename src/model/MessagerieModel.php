@@ -20,8 +20,8 @@ function getMessageFromDest($db, $id)
     $query->execute([
         'id' => $id
     ]);
-    $message = $query->fetchAll();
-    return $message;
+    $messages = $query->fetchAll();
+    return $messages;
 }
 
 function getMessageFromEmet($db, $id)

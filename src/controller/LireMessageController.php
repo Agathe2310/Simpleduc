@@ -4,7 +4,7 @@ function lireMessageController($twig, $db, $nbNotifs)
 {
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
     include_once '../src/model/MessagerieModel.php';  ##on inclut pour apres
-    $messages = getMessageFromDest($db, $_SESSION['idUser']);
+    $messages = getMessageFromDest($db, $_SESSION['iduser']);
 
     if (isset($_GET['id'])) {
         $idMessage = $_GET['id'];

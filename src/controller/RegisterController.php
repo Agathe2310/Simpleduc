@@ -18,7 +18,6 @@ function registerController($twig, $db, $nbNotifs)
             $_POST['registerNom'] != "" && $_POST['registerPrenom'] != ""
         ) {
             if (strlen($_POST['registerPassword']) >= 3) {
-                var_dump($_POST);
 
                 $email = $_POST['registerEmail'];
                 $password = $_POST['registerPassword'];

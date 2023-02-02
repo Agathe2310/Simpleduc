@@ -54,8 +54,6 @@ function addConfirmationCompte($db, $idUser)
 {
     $IDConf = intval(rand(100000, 999999));
 
-    var_dump("CONF COMPTE :");
-    var_dump(getConfirmationCompte($db, $IDConf));
 
 
     if (getConfirmationCompte($db, $IDConf) == false) {
@@ -116,8 +114,6 @@ function envoyerVerification($db, $twig, $idUser, $email) {
 
                     //Création vérif
                     $idRegister = addConfirmationCompte($db, $idUser);
-                    var_dump("ID REGISTER :");
-                    var_dump($idRegister);
 
                     //Envoyer mail
                     if ($idRegister != null) {

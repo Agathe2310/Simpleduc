@@ -27,8 +27,6 @@ function messagerieController($twig, $db, $nbNotifs)
 
     $messages = getMessageFromDest($db, $_SESSION['iduser']);
 
-    var_dump("POST : ");
-    var_dump($_POST);
 
     for ($i = 0; $i < count($messages); $i++) {
         $messages[$i]['Emetteur'] = getOneUserFromID($db, $messages[$i]['Emetteur']);

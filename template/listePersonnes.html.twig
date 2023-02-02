@@ -10,22 +10,26 @@
   
     {% for personne in listeContact %}
       <div>
-            <p> Prénom: {{personne.Nom}}</p>
-            <p> Nom: {{personne.Prenom}}</p>
-            <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
-            <a class="link" href="?page=addCoPersonne&id={{personne.IDPersonne}}">Voir les coordonnees</a>
-          </div>
+        <form method="POST">
+          <p> Prénom: {{personne.Nom}}</p>
+          <p> Nom: {{personne.Prenom}}</p>
+          <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
           <br>
-          <form method='POST' action="index.php?page=listePersonnes">
-          </form>
+          <button type="submit" class="btn btn-dark" name="btnCo" value="{{personne.IDPersonne}}">Voir les coordonnees</button>
+        </div>
+        </form>
+          <br>
           {% endfor %}
           <h1>Liste des développeurs</h1>
           {% for dev in listeDev %}
           <div>
-            <p> Prénom: {{dev.Nom}}</p>
-            <p> Nom: {{dev.Prenom}}</p>
-            <a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
-            <a class="link" href="?page=addCoPersonne&id={{dev.IDPersonne}}">Voir les coordonnees</a>
+            <form method='POST'>
+              <p> Prénom: {{dev.Nom}}</p>
+              <p> Nom: {{dev.Prenom}}</p>
+              <a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
+              <br>
+              <button type="submit" class="btn btn-dark" name="btnCo" value="{{dev.IDPersonne}}">Voir les coordonnees</button>
+            </form>
           </div>
           {% endfor %}
           <h1>Supprimer des personnes</h1>

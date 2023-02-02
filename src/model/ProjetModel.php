@@ -385,7 +385,7 @@ function addCoPersonne($db, $Rue, $Ville, $CodePostal, $Email, $IDPersonne)
 
 function getAllCo($db)
 {
-    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = Personne.IDPersonne");
+    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, Personne.email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = Personne.IDPersonne");
     $query->execute([]);
     $product = $query->fetchAll();
 

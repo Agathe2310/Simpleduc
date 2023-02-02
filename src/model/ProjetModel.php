@@ -310,9 +310,11 @@ function listePersonnes($db){
 
 function hasCo($db, $IDPersonne){
     $query = $db -> prepare("SELECT Rue, Ville, Code_Postal, email FROM Coordonnees WHERE IDPersonne = :IDPersonne ");
-    return $query -> execute([
+    $query -> execute([
         'IDPersonne'=>$IDPersonne
     ]);
+    $co = $query->fetchAll();
+    return $co;
 }
 function listeEntreprises($db){
     $query = $db -> prepare("SELECT IDEntre, Nom FROM Entreprise_Cliente"); 
@@ -426,12 +428,10 @@ function updateTache($db, $id, $libelle, $etat, $dateDebut, $dateFin, $module)
     ]);
 }
 
-function getCo($db, $IDPersonne)
-{
-    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = :IDPersonne AND Personne.IDPersonne");
-    $query->execute([
-        'IDPersonne' => $IDPersonne,
-    ]);
+function getCo($db, $IDPersonne){
+    $query = $db->prepare("SELECT Rue, Ville, Code_Postal, Personne.email, Personne.Nom, Personne.Prenom, Coordonnees.IDPersonne FROM Coordonnees, Personne WHERE Coordonnees.IDPersonne = :IDPersonne AND Personne.IDPersonne");
+    $query ->execute([
+        'IDPersonne'=> $IDPersonne, ]);
     $product = $query->fetch();
 
     return $product;

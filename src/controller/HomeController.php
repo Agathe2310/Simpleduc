@@ -6,7 +6,7 @@ function homeController($twig, $db, $nbNotifs)
 
     $role = 0;
 
-    if (isset($_SESSION['login'])) {
+    if (isset($_SESSION['iduser'])) {
 
         if (isset($_SESSION['role'])) {
             $role = $_SESSION['role'];

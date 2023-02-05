@@ -12,7 +12,7 @@ function creerMessageController($twig, $db, $nbNotifs)
         if ($_POST['Objet'] != "" && $_POST['Message'] != "" && $_POST['Destinataire'] != "0") {
             addMessage(
                 $db,
-                $_SESSION['idUser'],
+                $_SESSION['iduser'],
                 $_POST['Destinataire'],
                 $_POST['Objet'],
                 $_POST['Message']

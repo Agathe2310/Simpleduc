@@ -1,6 +1,6 @@
 <?php 
 
-function addOutilController($twig,$db){
+function addOutilController($twig,$db, $nbNotifs){
     include_once '../src/model/ProjetModel.php';  ##on inclut pour apres
 
     if(isset($_POST['Libelle']) && isset($_POST['Version']) && isset($_POST['btnAddOutil'])){
@@ -14,7 +14,8 @@ function addOutilController($twig,$db){
     }
     $allOutils = getAllOutils($db);
     echo $twig -> render("addOutil.html.twig", [
-        'allOutils' => $allOutils
+        'allOutils' => $allOutils,
+        'nbNotifs' => $nbNotifs
     ]);
 }
 

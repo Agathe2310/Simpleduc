@@ -11,27 +11,31 @@
 
       <div>
         <div class="container">
-          <form method="post" id="{{co.IDPersonne}}" action="index.php?page=listePersonnes">
+          <form method="post" id="{{co.IDPersonne}}" >
             <label for="nom" class="form-label">
               Rue
             </label>
+            <br>
             <input type="text" value="{{co.Rue}}" name="Rue"/>
             <label for="nom" class="form-label">
               Code Postal
-            </label>
-            <input type="text" value="{{co.Code_Postal}}" name="CodePostal"/>
+            </label><br>
+            <input type="text" value="{{co.Code_Postal}}" name="CodePostal"/><br>
             <label for="nom" class="form-label">
               Ville
-            </label>
+            </label><br>
             <input type="text" value="{{co.Ville}}" name="Ville"/>
             <br>
             <label for="nom" class="form-label">
               Email
-            </label>
+            </label><br>
             <input type="text" value="{{co.email}}" name="email"/>
             <button type="submit" class="btn btn-dark" name="btnModCo" value="{{co.IDPersonne}}" form="{{co.IDPersonne}}">
             
               Modifier </button>
+              <br>
+              </form>
+              <form method="post" id="{{co.IDPersonne}}" action="index.php?page=listePersonnes">
               <button type="submit" class="btn btn-dark" name="Revenir" action="index.php?page=listePersonnes" >
                 Revenir à la liste </button>
           </form>

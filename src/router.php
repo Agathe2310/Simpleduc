@@ -19,9 +19,8 @@ function initRouter($routes, $db)
         $route = $routes["dbError"];
     }
 
-    //test de si l'u a acces à la page
+    //test de si l'utilisateur a acces à la page
     $routeParameters = explode(':', $route);
-    //$controller devient HomeController (nom du fichier)
     $controller = ucfirst($routeParameters[0]);
     $access = $routeParameters[1] ?? 0;
     if ($access != 0) {

@@ -3,7 +3,6 @@
 class Mail
 {
 
-    //put your code here
     public function __construct()
     {
     }
@@ -53,8 +52,6 @@ function getConfirmationCompte($db, $IDConf)
 function addConfirmationCompte($db, $idUser)
 {
     $IDConf = intval(rand(100000, 999999));
-
-
 
     if (getConfirmationCompte($db, $IDConf) == false) {
         $query = $db->prepare("INSERT INTO ConfirmationCompte (IDConfirmation, IDPersonne, dateConf) VALUES (:IDConf, :IDPersonne, Now())");

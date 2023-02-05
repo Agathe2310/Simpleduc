@@ -31,7 +31,6 @@ function listePersonnesController($twig, $db, $nbNotifs){
                 array_push($listeContact, $i);
             }
         }
-    var_dump($listeContact);
     }
 
     
@@ -56,7 +55,9 @@ if (isset($_POST['btnCo'])){
         header("location: ?page=modifCoPersonne&id=".$valeur."");
     }
 }else{
-    echo $twig->render('listePersonnes.html.twig', ["liste"=> $liste, "listeDev"=>$listeDev, "listeContact"=>$listeContact,]);
+    echo $twig->render('listePersonnes.html.twig', [
+        "liste"=> $liste, "listeDev"=>$listeDev, "listeContact"=>$listeContact, 'nbNotifs' => $nbNotifs
+    ]);
 }
 
 

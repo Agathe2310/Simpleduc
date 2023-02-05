@@ -11,10 +11,9 @@ function modifierEntrepriseController($twig,$db){
         
     }
 
-    if (isset($_POST['modifierEntreprise']) && isset ($_POST['modifierIDEntreprise']) && isset ($_POST['modifierNomEntreprise'])){
-        $nouvelleIDEntreprise = $_POST['modifierIDEntreprise'];
+    if (isset($_POST['modifierEntreprise']) && isset ($_POST['modifierNomEntreprise'])){
         $nouveauNomEntreprise = $_POST['modifierNomEntreprise'];
-        modifierEntreprise($db, $id, $nouvelleIDEntreprise, $nouveauNomEntreprise);
+        modifierEntreprise($db, $id, $nouveauNomEntreprise);
     }
 
     if (isset ($id) && isset ($nomEntreprise)){

@@ -173,14 +173,13 @@ function supprimerEntreprise($db, $IDEntre)
     ]);
 }
 
-function modifierEntreprise($db, $IDEntreAncien, $IDEntreNouveau, $NomEntreNouveau)
+function modifierEntreprise($db, $IDEntre, $NomEntreNouveau)
 {
     $query = $db->prepare("UPDATE Entreprise_Cliente
-                            SET IDEntre = :IDEntreNouveau, `Nom` = :NomEntreNouveau
-                            WHERE IDEntre = :IDEntreAncien ");
+                            SET `Nom` = :NomEntreNouveau
+                            WHERE IDEntre = :IDEntre ");
     $query->execute([
-        'IDEntreAncien' => $IDEntreAncien,
-        'IDEntreNouveau' => $IDEntreNouveau,
+        'IDEntre' => $IDEntre,
         'NomEntreNouveau' => $NomEntreNouveau
     ]);
 }

@@ -20,7 +20,7 @@
 			</p>
 				<a href="?page=modifMdp&email={{session.login}}">Modifier votre mot de passe !</a>
 		</div>
-		{% if isdev is null %}
+		{% if isdev is not null %}
 		<div class="container card mb-3">
 			<h2 class="text-decoration-underline">Vos Groupes et Modules :</h2>
 			{% if equipes is defined %}

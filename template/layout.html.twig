@@ -29,6 +29,9 @@
                     <li class="nav-item"><a href="?page=addModule" class="nav-link">Module</a></li>
                     <li class="nav-item"><a href="?page=addOutil" class="nav-link">Outils</a></li>
                     <li class="nav-item"><a href="?page=listePersonnes" class="nav-link">Liste Personnes</a></li>
+                    {% block Recherche %}
+
+                    {% endblock %}
                     {% if session.login is defined %}
                     <li class="nav-item"><a href="?page=deconnexion" class="nav-link">Deconnexion</a></li>
                     <li class="nav-item"><a href="?page=messagerie" class="nav-link">Messagerie

@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 {% block messagerieNotif %}{{nbNotifs}}{% endblock %}
 
-{% block title %}Coucou !{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
 	<div class="container">
@@ -138,10 +138,31 @@
 				</div>
 		</div>
 		{% endif %}
-	{% else %}
-		<div class="alert alert-danger" role="alert">
-			<a href="?page=login" class="alert-link">Connectez vous !</a>
-		</div>
+		{% else %}
+		<p>Mettre le carrousel</p>
+            <div class="section section1 visible">
+                <div class="texteSection">
+                    <h3>Simpleduc</h3>
+					<p>Simpléduc est une ESN (Entreprise de services du numérique) fondée en 2013 à Arras (62000). Son activité principale est la création de logiciels innovants dans le secteur de l’éducation. Elle regroupe des développeurs spécialisés dans les nouvelles technologies, notamment dans la création de sites internet et de solutions mobiles.</p>
+				</div>
+                <div class="imageSection"><img src="img/image1.png"></div>
+			</div>
+            <div class="section section2 visible">
+                <div class="imageSection"><img src="img/image2.png"></div>
+				<div class="texteSection">
+					<h3>La partie développement</h3>
+					<p>Avec l’engouement des MOOCS et le développement d’outils numériques comme les smartphones et les tablettes, Simpléduc se concentre sur le développement d’applications sur mesure pour ses clients. Pour améliorer son efficacité et honorer ses contrats, l’entreprise développe également une
+						solution de gestion de projets en interne.L’entreprise Simpléduc mobilise des développeurs afin de réaliser un outil de gestion de projets. Celui-ci a pour objectif de suivre en temps réel les projets d’entreprise ainsi que les équipes qui les réalisent.</p>
+				</div>
+				
+			</div>
+            <div class="section section3">
+                <div class="texteSection">
+                    <h3>La partie Réseau</h3>
+					<p>L'entreprise se concentre également sur la partie réseaux des applications des clients. Elle dispose également de techniciens réseau qui travaillent sur la mise en place de l’infrastructure de l’entreprise.</p>
+				</div>
+                <div class="imageSection"><img src="img/image3.png"></div>
+			</div>
 	{% endif %}
 	</div>
 	{% endblock %}

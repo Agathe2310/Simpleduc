@@ -8,38 +8,41 @@
   <h1>Modification des coordonnées :</h1>
   <div style="display:grid; grid-template-columns: 1fr 1fr;" class="m-5">
     <div style="display:grid; grid-template-columns: 1fr 1fr;">
-
-      <div>
         <div class="container">
-          <form method="post" id="{{co.IDPersonne}}" >
+          <form method="post" id="modificationCoordonneesForm" onsubmit="return validateFormCoordonnees()">
             <label for="nom" class="form-label">
               Rue
             </label>
-            <br>
             <input type="text" value="{{co.Rue}}" name="Rue"/>
+            <span style="color: red;" id="rueError" class="error"></span><br>
             <label for="nom" class="form-label">
               Code Postal
-            </label><br>
+            </label>
             <input type="text" value="{{co.Code_Postal}}" name="CodePostal"/><br>
+            <span style="color: red;" id="codePostalError" class="error"></span>
             <label for="nom" class="form-label">
               Ville
-            </label><br>
+            </label>
             <input type="text" value="{{co.Ville}}" name="Ville"/>
+            <span style="color: red;" id="villeError" class="error"></span>
             <br>
             <label for="nom" class="form-label">
               Email
-            </label><br>
+            </label>
             <input type="text" value="{{co.email}}" name="email"/>
-            <button type="submit" class="btn btn-dark" name="btnModCo" value="{{co.IDPersonne}}" form="{{co.IDPersonne}}">
-            
-              Modifier </button>
-              <br>
-              </form>
-              <form method="post" id="{{co.IDPersonne}}" action="index.php?page=listePersonnes">
-              <button type="submit" class="btn btn-dark" name="Revenir" action="index.php?page=listePersonnes" >
-                Revenir à la liste </button>
+            <span style="color: red;" id="emailError" class="error"></span><br>
+            <button type="submit" class="btn btn-dark" name="btnModCo" value="{{co.IDPersonne}}" form="modificationCoordonneesForm">
+              Modifier
+            </button>
+            <br>
+          </form>
+          <form method="post" id="revenirListeForm" action="index.php?page=listePersonnes">
+              <button type="submit" class="btn btn-dark" name="Revenir" action="index.php?page=listePersonnes" form="revenirListeForm">
+                Revenir à la liste
+              </button>
           </form>
       </div>
+    </div>
   </div>
 </div>
 {% endblock %}

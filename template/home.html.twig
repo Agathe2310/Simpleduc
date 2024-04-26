@@ -1,12 +1,14 @@
 {% extends "layout.html.twig" %}
 {% block messagerieNotif %}{{nbNotifs}}{% endblock %}
 
-{% block title %}Home !{% endblock %}
 
 {% block content %}
 <div class="container">
+
+	
 	{% if session.login is defined %}
 
+	
 	<div id="caroussel-container" class="caroussel-container">
 
 		<div class="caroussel-boutton-gauche"><img src="img/left.png" alt="left" class="image-boutton"
@@ -16,13 +18,20 @@
 
 		<div id="petits-points" class="petits-points"></div>
 
-		<img src="https://diapogram.com/upload/2019/04/11/20190411143210-a47b9215.jpg" alt="" id="image-caroussel-1" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.24T00MDK-RUhFnm1Do5PFwHaFj?rs=1&pid=ImgDetMain" alt="" id="image-caroussel-2" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.lxeR2-MsKo47P7ADVRw3CwHaEo?rs=1&pid=ImgDetMain" alt="" id="image-caroussel-3" class="image-caroussel">
-		<img src="https://s1.1zoom.me/b5050/399/Mountains_Scenery_Sky_444370_3840x2400.jpg" alt="" id="image-caroussel-4" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.eEbPE46M70VJPFoaZzwoKAHaEo?rs=1&pid=ImgDetMain" alt="" id="image-caroussel-5" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.TonukVeJJZtbIBq8pY81ZAHaEK?rs=1&pid=ImgDetMain" alt="" id="image-caroussel-6" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.vf65fRzVBXrDbTHl6TIujgHaE7?rs=1&pid=ImgDetMain" alt="" id="image-caroussel-7" class="image-caroussel">
+		<img src="https://diapogram.com/upload/2019/04/11/20190411143210-a47b9215.jpg" alt="" id="image-caroussel-1"
+			class="image-caroussel">
+		<img src="https://th.bing.com/th/id/OIP.24T00MDK-RUhFnm1Do5PFwHaFj?rs=1&pid=ImgDetMain" alt=""
+			id="image-caroussel-2" class="image-caroussel">
+		<img src="https://th.bing.com/th/id/OIP.lxeR2-MsKo47P7ADVRw3CwHaEo?rs=1&pid=ImgDetMain" alt=""
+			id="image-caroussel-3" class="image-caroussel">
+		<img src="https://s1.1zoom.me/b5050/399/Mountains_Scenery_Sky_444370_3840x2400.jpg" alt=""
+			id="image-caroussel-4" class="image-caroussel">
+		<img src="https://th.bing.com/th/id/OIP.eEbPE46M70VJPFoaZzwoKAHaEo?rs=1&pid=ImgDetMain" alt=""
+			id="image-caroussel-5" class="image-caroussel">
+		<img src="https://th.bing.com/th/id/OIP.TonukVeJJZtbIBq8pY81ZAHaEK?rs=1&pid=ImgDetMain" alt=""
+			id="image-caroussel-6" class="image-caroussel">
+		<img src="https://th.bing.com/th/id/OIP.vf65fRzVBXrDbTHl6TIujgHaE7?rs=1&pid=ImgDetMain" alt=""
+			id="image-caroussel-7" class="image-caroussel">
 	</div>
 
 
@@ -36,7 +45,7 @@
 			Vérifié!
 			{% else %}
 			Non Vérifié!
-			{% endif %}
+			{% endif %}  {# ok #}
 		</p>
 		<a href="?page=modifMdp&email={{session.login}}">Modifier votre mot de passe !</a>
 	</div>
@@ -52,7 +61,7 @@
 				<a class="link-light" href="?page=home&idequipe={{equipe.IDEquipe}}">Voir les membres et modules</a>
 				{% else %}
 				<a class="link-light" href="?page=home&idequipe=-1">Masquer ce groupe</a>
-				{% endif %}
+				{% endif %} {# ok #}
 			</li>
 			{% if equipeselectionner == equipe.IDEquipe %}
 			<ul class="list-group list-group-flush">
@@ -72,7 +81,7 @@
 						</li>
 						{% else %}
 						<p>Pas de Chef de Projet défini</p>
-						{% endif %}
+						{% endif %} {# ok #}
 					</ul>
 				</li>
 				<li class="list-group-item">
@@ -111,13 +120,13 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Aucun module attribué à ce groupe</li>
 					</ul>
-					{% endif %}
+					{% endif %} {# ok #}
 				</li>
 			</ul>
-			{% endif %}
+			{% endif %} {# ok #}
 		</ul>
 		{% endfor %}
-		{% endif %}
+		{% endif %} {# ok #}
 	</div>
 	<div class="container card mb-3">
 		<h2 class="text-decoration-underline">Outils maîtrisés :</h2>
@@ -141,7 +150,7 @@
 							form="{{outiluser.Code}}">Supprimer cette Outil</button>
 					</li>
 					{% endfor %}
-					{% endif %}
+					{% endif %} {# ok #}
 				</ul>
 			</div>
 			<div class="col">
@@ -154,43 +163,18 @@
 					</select>
 					<input class="btn btn-outline-primary" type="submit" name="ajouterOutil" value="Ajouter l'Outil">
 
-						</form>
-					</div>
-				</div>
+				</form>
+			</div>
 		</div>
-		{% endif %}
-		{% else %}
-		<p>Mettre le carrousel</p>
-            <div class="section section1 visible">
-                <div class="texteSection">
-                    <h3>Simpleduc</h3>
-					<p>Simpléduc est une ESN (Entreprise de services du numérique) fondée en 2013 à Arras (62000). Son activité principale est la création de logiciels innovants dans le secteur de l’éducation. Elle regroupe des développeurs spécialisés dans les nouvelles technologies, notamment dans la création de sites internet et de solutions mobiles.</p>
-				</div>
-                <div class="imageSection"><img src="img/image1.png"></div>
-			</div>
-            <div class="section section2 visible">
-                <div class="imageSection"><img src="img/image2.png"></div>
-				<div class="texteSection">
-					<h3>La partie développement</h3>
-					<p>Avec l’engouement des MOOCS et le développement d’outils numériques comme les smartphones et les tablettes, Simpléduc se concentre sur le développement d’applications sur mesure pour ses clients. Pour améliorer son efficacité et honorer ses contrats, l’entreprise développe également une
-						solution de gestion de projets en interne.L’entreprise Simpléduc mobilise des développeurs afin de réaliser un outil de gestion de projets. Celui-ci a pour objectif de suivre en temps réel les projets d’entreprise ainsi que les équipes qui les réalisent.</p>
-				</div>
-				
-			</div>
-            <div class="section section3">
-                <div class="texteSection">
-                    <h3>La partie Réseau</h3>
-					<p>L'entreprise se concentre également sur la partie réseaux des applications des clients. Elle dispose également de techniciens réseau qui travaillent sur la mise en place de l’infrastructure de l’entreprise.</p>
-				</div>
-                <div class="imageSection"><img src="img/image3.png"></div>
-			</div>
-	{% endif %}
-	{% else %}
+	</div>
+	{% endif %} {# ok #}
+	
+	<script src="public/js/caroussel.js" type="module" />
+	{% else %} {# ok 1 #}
 	<div class="alert alert-danger" role="alert">
 		<a href="?page=login" class="alert-link">Connectez vous !</a>
 	</div>
-	{% endif %}
+	{% endif %} {# ok 1 #}
 </div>
-<script src="public/js/caroussel.js" type="module" />
 
 {% endblock %}

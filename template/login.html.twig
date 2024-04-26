@@ -1,10 +1,10 @@
 {% extends "layout.html.twig" %}
-{% block title %}Login{% endblock %}
+{% block title %}Connexion{% endblock %}
 {% block content %}
 <div class="container">
   <div class="card bg-grey mx-auto" style="width: 30%;">
     <div class="m-5 ">
-      <h1>Login</h1>
+      <h1>Connexion</h1>
       {% if user == "faux" %}
       <p style="color: red;">Mauvais email ou mot de passe</p>
       {% else %}
@@ -21,18 +21,18 @@
       <form action="?page=login" method="post">
         <br>
         <p>
-          <label for="emailLogin">Username :</label>
+          <label for="emailLogin">Adresse mail :</label>
           <input type="email" name="emailLogin" placeholder="Username">
         </p>
         <p>
-          <label for="passwordLogin">Password :</label>
+          <label for="passwordLogin">Mot de passe :</label>
           <input type="password" name="passwordLogin" placeholder="Password">
         </p>
 
         <input type="submit" name="submitLogin" class="btn btn-primary">
       </form>
 
-      <a href="?page=register">Register</a>
+      <a href="?page=register">Pas encore inscrit ? S'incrire ici</a>
     </div>
   </div>
 </div>

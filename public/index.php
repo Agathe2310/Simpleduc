@@ -9,6 +9,9 @@ require_once '../src/database.php';
 require_once '../src/model/MailModel.php';
 include_once '../src/model/MessagerieModel.php';  ##on inclut pour apres
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 session_start();
 

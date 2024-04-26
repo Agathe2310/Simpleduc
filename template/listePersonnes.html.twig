@@ -1,51 +1,70 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Liste des personnes !{% endblock %}
-{% block messagerieNotif %}{{nbNotifs}}{% endblock %}
+{% block title %}Liste des personnes !
+{% endblock %}
+{% block messagerieNotif %}
+	{{nbNotifs}}
+{% endblock %}
 
 {% block content %}
-<div class="container">
+	<div class="container">
 
-  <h1>Liste des contacts</h1>
-  
-    {% for personne in listeContact %}
-      <div>
-        <form method="POST">
-          <p> Prénom: {{personne.Nom}}</p>
-          <p> Nom: {{personne.Prenom}}</p>
-          <a class="link" href="?page=modifPersonne&id={{personne.IDPersonne}}">Modifier</a>
-          <br>
-          <button type="submit" class="btn btn-dark" name="btnCo" value="{{personne.IDPersonne}}">Voir les coordonnees</button>
-        </div>
-        </form>
-          <br>
+		<h1>Liste des contacts</h1>
+
+		{% for personne in listeContact %}
+			<div class="container card mb-3 mt-3">
+				<form method="POST">
+					<p>
+						Prénom:
+						{{personne.Nom}}</p>
+					<p>
+						Nom:
+						{{personne.Prenom}}</p>
+					<a class="btn btn-primary" href="?page=modifPersonne&id={{personne.IDPersonne}}">
+            Modifier
+            </a>
+					<br>
+					<button type="submit" class="btn btn-primary" name="btnCo" value="{{personne.IDPersonne}}">Voir les coordonnees</button>
+				</div>
+			</form>
+			<br>
+		{% endfor %}
+		<hr>
+		<h1>Liste des développeurs</h1>
+		{% for dev in listeDev %}
+			<div class="container card mb-3 mt-3">
+				<form method='POST'>
+					<p>
+						Prénom:
+						{{dev.Nom}}</p>
+					<p>
+						Nom:
+						{{dev.Prenom}}</p>
+					<a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
+					<br>
+					<button type="submit" class="btn btn-primary" name="btnCo" value="{{dev.IDPersonne}}">Voir les coordonnees</button>
+				</form>
+			</div>
+		{% endfor %}
+		<hr>
+		<h1>Supprimer des personnes</h1>
+		{% for personne in liste %}
+    <form method='POST' action="index.php?page=listePersonnes">
+      <div class="container card mb-3 mt-3">
+        <p>
+          <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}"/>
+          <label>Prénom:
+            {{personne.Nom}}</label>
+            <label>
+              Nom:
+              {{personne.Prenom}}</label>
+						</p>
+					</div>
           {% endfor %}
-          <h1>Liste des développeurs</h1>
-          {% for dev in listeDev %}
-          <div>
-            <form method='POST'>
-              <p> Prénom: {{dev.Nom}}</p>
-              <p> Nom: {{dev.Prenom}}</p>
-              <a class="link" href="?page=modifDev&id={{dev.IDPersonne}}">Modifier</a>
-              <br>
-              <button type="submit" class="btn btn-dark" name="btnCo" value="{{dev.IDPersonne}}">Voir les coordonnees</button>
-            </form>
-          </div>
-          {% endfor %}
-          <h1>Supprimer des personnes</h1>
-          <hr>
-          {% for personne in liste %}
-          <form method='POST' action="index.php?page=listePersonnes">
-      <div>
-        <input type="checkbox" name="liste[]" value="{{personne.IDPersonne}}" />
-            <p> Prénom: {{personne.Nom}}</p> <p> Nom: {{personne.Prenom}}</p>
-            <hr>
-          </div>
-          {% endfor %}
-          <button type="submit" class="btn btn-dark"  name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
-        </form>
-        
-        
-        
-      </div>
-        {% endblock %}
+          <button type="submit" class="btn btn-primary" name="btnDeletePersonne" value="{{personne.IDPersonne}}">Supprimer</button>
+			</form>
+		</div>
+
+
+	</div>
+{% endblock %}

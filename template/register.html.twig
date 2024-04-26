@@ -1,13 +1,13 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block content %}
 <div class="container">
 
   <div class="card bg-grey mx-auto" style="width: 50%;">
     <div class="m-5 ">
-      <h1>Register</h1>
+      <h1>Inscription</h1>
 
       {% if erreur == "existe deja" %}
       <p style="color: red;">Cette adresse mail existe déjà !</p>
@@ -21,39 +21,40 @@
       <p style="color: green;">Compte créé !</p>
       {% endif %}
 
-      {% if erreur == "mdp trop court" %}
-      <p style="color: red;">Mot de passe trop court (Minimum 3 caractères) !</p>
-      {% endif %}
-
-      <form action="?page=register" method="POST">
+      <form action="?page=register" method="POST" id="registrationForm" onsubmit="return validateFormRegister()">
+        <span style="color: red;" id="champsError" class="error"></span>
         <p>
           <label for="registerEmail">Email :</label>
           <input type="email" name="registerEmail" placeholder="Email">
         </p>
+        <span style="color: red;" id="emailError" class="error"></span>
         <p>
           <label for="registerNom">Nom :</label>
           <input type="text" name="registerNom" placeholder="Nom">
         </p>
+        <span  style="color: red;" id="nomError" class="error"></span>
         <p>
           <label for="registerPrenom">Prénom :</label>
           <input type="text" name="registerPrenom" placeholder="Prénom">
         </p>
+        <span style="color: red;" id="prenomError" class="error"></span>
         <p>
-          <label for="registerPassword">Password :</label>
-          <input type="password" name="registerPassword" placeholder="Password">
+          <label for="registerPassword">Mot de passe :</label>
+          <input type="password" name="registerPassword" id="registerPassword" placeholder="Mot de passe">
         </p>
-        {#
+        <span style="color: red;" id="passwordError" class="error"></span>
         <p>
-          <label for="password">Confirm Password :</label>
-          <input type="password2" name="password2" placeholder="Confirm Password">
+          <label for="password">Confirmer le mot de passe :</label>
+          <input type="password" name="password2" id="password2" placeholder="Confirmer le mot de passe">
         </p>
-        #}
-
+        <span style="color: red;" id="password2Error" class="error"></span>
+        <br>
         <input type="submit" name="registerBtn" class="btn btn-primary">
       </form>
-      <a href="?page=login">Login</a>
+      <a href="?page=login">Déjà inscrit ? Se connecter ici</a>
     </div>
   </div>
 
 </div>
+
 {% endblock %}

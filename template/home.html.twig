@@ -1,180 +1,215 @@
 {% extends "layout.html.twig" %}
-{% block messagerieNotif %}{{nbNotifs}}{% endblock %}
+{% block messagerieNotif %}
+	{{nbNotifs}}
+{% endblock %}
 
 
 {% block content %}
-<div class="container">
-
-	
-	{% if session.login is defined %}
-
-	
-	<div id="caroussel-container" class="caroussel-container">
-
-		<div class="caroussel-boutton-gauche"><img src="img/left.png" alt="left" class="image-boutton"
-				id="caroussel-gauche"></div>
-		<div class="caroussel-boutton-droite"><img src="img/right.png" alt="left" class="image-boutton"
-				id="caroussel-droite"></div>
-
-		<div id="petits-points" class="petits-points"></div>
-
-		<img src="https://diapogram.com/upload/2019/04/11/20190411143210-a47b9215.jpg" alt="" id="image-caroussel-1"
-			class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.24T00MDK-RUhFnm1Do5PFwHaFj?rs=1&pid=ImgDetMain" alt=""
-			id="image-caroussel-2" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.lxeR2-MsKo47P7ADVRw3CwHaEo?rs=1&pid=ImgDetMain" alt=""
-			id="image-caroussel-3" class="image-caroussel">
-		<img src="https://s1.1zoom.me/b5050/399/Mountains_Scenery_Sky_444370_3840x2400.jpg" alt=""
-			id="image-caroussel-4" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.eEbPE46M70VJPFoaZzwoKAHaEo?rs=1&pid=ImgDetMain" alt=""
-			id="image-caroussel-5" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.TonukVeJJZtbIBq8pY81ZAHaEK?rs=1&pid=ImgDetMain" alt=""
-			id="image-caroussel-6" class="image-caroussel">
-		<img src="https://th.bing.com/th/id/OIP.vf65fRzVBXrDbTHl6TIujgHaE7?rs=1&pid=ImgDetMain" alt=""
-			id="image-caroussel-7" class="image-caroussel">
-	</div>
+	<div class="container">
 
 
-	<div class="container card mb-3">
-		<h2 class="text-decoration-underline">Votre Profil :</h2>
-		<h4>Bonjour {{infos.Nom}} {{infos.Prenom}}</h4>
-		<p>Rôle : {{ role }}</p>
-		<p>Email :{{session.login}}</p>
-		<p>État du compte :
-			{% if infos.CompteVerifie == 1 %}
-			Vérifié!
-			{% else %}
-			Non Vérifié!
-			{% endif %}  {# ok #}
-		</p>
-		<a href="?page=modifMdp&email={{session.login}}">Modifier votre mot de passe !</a>
-	</div>
-	{% if isdev is not null %}
-	<div class="container card mb-3">
-		<h2 class="text-decoration-underline">Vos Groupes et Modules :</h2>
-		{% if equipes is defined %}
-		{% for equipe in equipes %}
-		<ul class="list-group">
-			<li class="list-group-item bg-info text-light">
-				<span class="fs-4">Groupe N°{{ equipe.IDEquipe }} :</span>
-				{% if equipeselectionner != equipe.IDEquipe %}
-				<a class="link-light" href="?page=home&idequipe={{equipe.IDEquipe}}">Voir les membres et modules</a>
-				{% else %}
-				<a class="link-light" href="?page=home&idequipe=-1">Masquer ce groupe</a>
-				{% endif %} {# ok #}
-			</li>
-			{% if equipeselectionner == equipe.IDEquipe %}
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item">
-					<span class="fw-bold">Chef du Groupe :</span>
-					<ul class="list-group list-group-flush">
-						{% if chef is defined %}
-						<li class="list-group-item">
-							<span class="fw-bold">Nom :</span>
-							{{chef.Nom}}
-							|
-							<span class="fw-bold">Prénom :</span>
-							{{chef.Prenom}}
-							|
-							<span class="fw-bold">Email :</span>
-							{{chef.Email}}
-						</li>
-						{% else %}
-						<p>Pas de Chef de Projet défini</p>
-						{% endif %} {# ok #}
-					</ul>
-				</li>
-				<li class="list-group-item">
-					<span class="fw-bold">Membres du Groupe : </span>
-					{% for membre in membres %}
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">
-							<span class="fw-bold">Nom :</span>
-							{{membre.Nom}}
-							|
-							<span class="fw-bold">Prénom :</span>
-							{{membre.Prenom}}
-							|
-							<span class="fw-bold">Email :</span>
-							{{membre.Email}}
-						</li>
-					</ul>
-					{% endfor %}
-				</li>
-				<li class="list-group-item">
-					<span class="fw-bold">Module(s) du Groupe : </span>
-					{% if module is defined %}
-					{% for module in modules %}
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">
-							<span class="fw-bold">Module N°{{module.IDModule}}</span>
-							|
-							<span class="fw-bold">État du Module :</span>
-							{{module.Etat}}
-							|
-							<span class="fw-bold">Contrat N°{{module.IDContrat}}</span>
-						</li>
-					</ul>
-					{% endfor %}
+		{% if session.login is defined %}
+			<div class="container card mb-3">
+				<h2 class="text-decoration-underline">Votre Profil :</h2>
+				<h4>Bonjour
+					{{infos.Nom}}
+					{{infos.Prenom}}</h4>
+				<p>Rôle :
+					{{ role }}</p>
+				<p>Email :{{session.login}}</p>
+				<p>État du compte :
+					{% if infos.CompteVerifie == 1 %}
+						Vérifié!
 					{% else %}
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Aucun module attribué à ce groupe</li>
-					</ul>
-					{% endif %} {# ok #}
-				</li>
-			</ul>
-			{% endif %} {# ok #}
-		</ul>
-		{% endfor %}
-		{% endif %} {# ok #}
-	</div>
-	<div class="container card mb-3">
-		<h2 class="text-decoration-underline">Outils maîtrisés :</h2>
-		<div class="row">
-			<div class="col">
-				<h4 class="fst-italic">Liste des Outils maîtrisé :</h4>
-				<ul class="list-group mb-3">
-					<form method="POST" class="encadre grande-margin-lr mb-3">
-						<input type="text" name="NomOutil">
-						<input type="submit" name="RechercherOutil" value="Rechercher">
-					</form>
-					{% if outilsuser is empty %}
-					<li class="list-group-item bg-danger"> Aucun outil maîtrisé sur votre profil !</li>
-					{% else %}
-					{% for outiluser in outilsuser %}
-					<li class="list-group-item">Logiciel : {{outiluser.Libelle}} | Version : {{outiluser.Version}}
-						<form enctype="multipart/form-data" method="POST" id="{{outiluser.Code}}">
-							<input type="hidden" name="supprimerOutil" value="{{outiluser.Code}}">
-						</form>
-						<button class="btn btn-outline-danger" type="submit" name="submitSupprimerOutil"
-							form="{{outiluser.Code}}">Supprimer cette Outil</button>
-					</li>
-					{% endfor %}
-					{% endif %} {# ok #}
-				</ul>
+						Non Vérifié!
+					{% endif %}
+					{# ok #}
+				</p>
+				<a href="?page=modifMdp&email={{session.login}}">Modifier votre mot de passe !</a>
 			</div>
-			<div class="col">
-				<h4 class="fst-italic">Ajouter un Outil maîtrisé :</h4>
-				<form method="POST" class="encadre grande-margin-lr">
-					<select class="form-select" id="CodeOutil" name="CodeOutil">
-						{% for outil in outils %}
-						<option value="{{outil.Code}}">{{outil.Libelle}} | Version {{outil.Version}}</option>
+			{% if isdev is not null %}
+				<div class="container card mb-3">
+					<h2 class="text-decoration-underline">Vos Groupes et Modules :</h2>
+					{% if equipes is defined %}
+						{% for equipe in equipes %}
+							<ul class="list-group">
+								<li class="list-group-item bg-info text-light">
+									<span class="fs-4">Groupe N°{{ equipe.IDEquipe }}
+										:</span>
+									{% if equipeselectionner != equipe.IDEquipe %}
+										<a class="link-light" href="?page=home&idequipe={{equipe.IDEquipe}}">Voir les membres et modules</a>
+									{% else %}
+										<a class="link-light" href="?page=home&idequipe=-1">Masquer ce groupe</a>
+									{% endif %}
+									{# ok #}
+								</li>
+								{% if equipeselectionner == equipe.IDEquipe %}
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">
+											<span class="fw-bold">Chef du Groupe :</span>
+											<ul class="list-group list-group-flush">
+												{% if chef is defined %}
+													<li class="list-group-item">
+														<span class="fw-bold">Nom :</span>
+														{{chef.Nom}}
+														|
+														<span class="fw-bold">Prénom :</span>
+														{{chef.Prenom}}
+														|
+														<span class="fw-bold">Email :</span>
+														{{chef.Email}}
+													</li>
+												{% else %}
+													<p>Pas de Chef de Projet défini</p>
+												{% endif %}
+												{# ok #}
+											</ul>
+										</li>
+										<li class="list-group-item">
+											<span class="fw-bold">Membres du Groupe :
+											</span>
+											{% for membre in membres %}
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item">
+														<span class="fw-bold">Nom :</span>
+														{{membre.Nom}}
+														|
+														<span class="fw-bold">Prénom :</span>
+														{{membre.Prenom}}
+														|
+														<span class="fw-bold">Email :</span>
+														{{membre.Email}}
+													</li>
+												</ul>
+											{% endfor %}
+										</li>
+										<li class="list-group-item">
+											<span class="fw-bold">Module(s) du Groupe :
+											</span>
+											{% if module is defined %}
+												{% for module in modules %}
+													<ul class="list-group list-group-flush">
+														<li class="list-group-item">
+															<span class="fw-bold">Module N°{{module.IDModule}}</span>
+															|
+															<span class="fw-bold">État du Module :</span>
+															{{module.Etat}}
+															|
+															<span class="fw-bold">Contrat N°{{module.IDContrat}}</span>
+														</li>
+													</ul>
+												{% endfor %}
+											{% else %}
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item">Aucun module attribué à ce groupe</li>
+												</ul>
+											{% endif %}
+											{# ok #}
+										</li>
+									</ul>
+								{% endif %}
+								{# ok #}
+							</ul>
 						{% endfor %}
-					</select>
-					<input class="btn btn-outline-primary" type="submit" name="ajouterOutil" value="Ajouter l'Outil">
+					{% endif %}
+					{# ok #}
+				</div>
+				<div class="container card mb-3">
+					<h2 class="text-decoration-underline">Outils maîtrisés :</h2>
+					<div class="row">
+						<div class="col">
+							<h4 class="fst-italic">Liste des Outils maîtrisé :</h4>
+							<ul class="list-group mb-3">
+								<form method="POST" class="encadre grande-margin-lr mb-3">
+									<input type="text" name="NomOutil">
+									<input type="submit" name="RechercherOutil" value="Rechercher">
+								</form>
+								{% if outilsuser is empty %}
+									<li class="list-group-item bg-danger">
+										Aucun outil maîtrisé sur votre profil !</li>
+								{% else %}
+									{% for outiluser in outilsuser %}
+										<li class="list-group-item">Logiciel :
+											{{outiluser.Libelle}}
+											| Version :
+											{{outiluser.Version}}
+											<form enctype="multipart/form-data" method="POST" id="{{outiluser.Code}}">
+												<input type="hidden" name="supprimerOutil" value="{{outiluser.Code}}">
+											</form>
+											<button class="btn btn-outline-danger" type="submit" name="submitSupprimerOutil" form="{{outiluser.Code}}">Supprimer cette Outil</button>
+										</li>
+									{% endfor %}
+								{% endif %}
+								{# ok #}
+							</ul>
+						</div>
+						<div class="col">
+							<h4 class="fst-italic">Ajouter un Outil maîtrisé :</h4>
+							<form method="POST" class="encadre grande-margin-lr">
+								<select class="form-select" id="CodeOutil" name="CodeOutil">
+									{% for outil in outils %}
+										<option value="{{outil.Code}}">{{outil.Libelle}}
+											| Version
+											{{outil.Version}}</option>
+									{% endfor %}
+								</select>
+								<input class="btn btn-outline-primary" type="submit" name="ajouterOutil" value="Ajouter l'Outil">
 
-				</form>
+							</form>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			{# ok #}
+
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			crossorigin="anonymous"></script>
+		{% else %}
+			<div class="alert alert-danger" role="alert">
+				<a href="?page=login" class="alert-link">Connectez vous !
+					<i class="bi bi-arrow-left-circle-fill"></i>
+				</a>
 			</div>
-		</div>
+			<div id="caroussel-container" class="caroussel-container">
+
+				<div class="caroussel-boutton-gauche"><img src="img/left.png"  alt="left" class="image-boutton" id="caroussel-gauche"></div>
+				<div class="caroussel-boutton-droite"><img src="img/right.png" alt="left" class="image-boutton" id="caroussel-droite"></div>
+
+				<div id="petits-points" class="petits-points"></div>
+
+				<img src="https://edito-img.annonces-legales.fr/2023/11/gettyimages-1460755337-6560a6f0869ed387410922.jpg?w=888&h=450&q=90&s=d5d386f0cf818987d0d12256839114ba" alt="" id="image-caroussel-1" class="image-caroussel">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZinsz0iZ6zYXnRVhWAPLdNu0j3gmpRr5dsOzHN6yGzA&s" alt="" id="image-caroussel-2" class="image-caroussel">
+				<img src="https://assets-global.website-files.com/5ce11396d0cadb67eb2cac0e/61c34c0ba478e720a65bb70b_Knowledge%20sharing.jpg" alt="" id="image-caroussel-3" class="image-caroussel">
+				<img src="https://img.freepik.com/free-photo/html-css-collage-concept-with-person_23-2150062008.jpg" alt="" id="image-caroussel-4" class="image-caroussel">
+				<img src="https://img.freepik.com/photos-gratuite/groupe-personnes-diverses-ayant-reunion-affaires_53876-25060.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1714089600&semt=sph" alt="" id="image-caroussel-5" class="image-caroussel">
+				<img src="https://www.shutterstock.com/image-photo/digital-technology-software-development-concept-600nw-2111828198.jpg" alt="" id="image-caroussel-6" class="image-caroussel">
+				<img src="https://img.freepik.com/vecteurs-libre/developpeurs-web-dessines-main_23-2148819604.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1713830400&semt=ais" alt="" id="image-caroussel-7" class="image-caroussel">
+			</div>
+			<div class="section section1 visible">
+				<div class="texteSection">
+					<h3>Simpleduc</h3>
+					<p>Simpléduc est une ESN (Entreprise de services du numérique) fondée en 2013 à Arras (62000). Son activité principale est la création de logiciels innovants dans le secteur de l’éducation. Elle regroupe des développeurs spécialisés dans les nouvelles technologies, notamment dans la création de sites internet et de solutions mobiles.</p>
+				</div>
+			</div>
+			<div class="section section2 visible">
+				<div class="texteSection">
+					<h3>La partie développement</h3>
+					<p>Avec l’engouement des MOOCS et le développement d’outils numériques comme les smartphones et les tablettes, Simpléduc se concentre sur le développement d’applications sur mesure pour ses clients. Pour améliorer son efficacité et honorer ses contrats, l’entreprise développe également une
+										solution de gestion de projets en interne.L’entreprise Simpléduc mobilise des développeurs afin de réaliser un outil de gestion de projets. Celui-ci a pour objectif de suivre en temps réel les projets d’entreprise ainsi que les équipes qui les réalisent.</p>
+				</div>
+
+			</div>
+			<div class="section section3">
+				<div class="texteSection">
+					<h3>La partie Réseau</h3>
+					<p>L'entreprise se concentre également sur la partie réseaux des applications des clients. Elle dispose également de techniciens réseau qui travaillent sur la mise en place de l’infrastructure de l’entreprise.</p>
+				</div>
+			</div>
+			<script src="js/caroussel.js" type="module"></script>
+			<script src="js/script.js" type="module"></script>
+
+		{% endif %}
+		{# ok 1 #}
 	</div>
-	{% endif %} {# ok #}
-	
-	<script src="public/js/caroussel.js" type="module" />
-	{% else %} {# ok 1 #}
-	<div class="alert alert-danger" role="alert">
-		<a href="?page=login" class="alert-link">Connectez vous !</a>
-	</div>
-	{% endif %} {# ok 1 #}
-</div>
 
 {% endblock %}

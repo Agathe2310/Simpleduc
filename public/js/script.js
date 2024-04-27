@@ -106,3 +106,32 @@ function validateFormRegister() {
 
     return isValid;
 }
+
+window.addEventListener('scroll', function() {
+  var windowTop = window.scrollY || window.pageYOffset;
+  var section1 = document.querySelector('.section1');
+  var section2 = document.querySelector('.section2');
+  var section3 = document.querySelector('.section3');
+
+  var section1Top = section1.getBoundingClientRect().top;
+  var section2Top = section2.getBoundingClientRect().top;
+  var section3Top = section3.getBoundingClientRect().top;
+
+  if (windowTop >= section1Top) {
+    section1.style.left = '0';
+  } else {
+    section1.style.left = '-100%';
+  }
+
+  if (windowTop >= section2Top) {
+    section2.style.left = '0';
+  } else {
+    section2.style.left = '100%';
+  }
+
+  if (windowTop >= section3Top) {
+    section3.style.left = '0';
+  } else {
+    section3.style.left = '-100%';
+  }
+});

@@ -45,7 +45,7 @@ function replaceImages() {
     document.getElementById("petits-points").children.length -
       1 -
       imageDevantIndex
-  ].style.backgroundColor = "aqua";
+  ].style.backgroundColor = "#7b9b9b";
 }
 
 export function loadImages() {
